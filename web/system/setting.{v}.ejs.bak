@@ -1,0 +1,1118 @@
+<% layout(locals.global.theme_layout_dir+'/master.ejs') -%>
+<div id="Params" class="subModel">
+    <div class="title">
+        <span class="warning-tab selected" id="phase"><%-locals.ml("Reference phase")%></span>
+        <span class="warning-tab" id="limit"><%-locals.ml("Set limit")%></span>
+        <span class="warning-tab" id="others"><%-locals.ml("Others")%></span>
+    </div>
+    <div class="warning-tab-pannel">
+        <div class="page-content" id="phasePage">
+            <div>
+                <button id="add" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</button>
+                <button id="remove" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</button>
+                <button id="save" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</button>
+                <button id="undo" class="easyui-linkbutton" data-options="iconCls:'icon-undo'">取消</button>
+                <button id="edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">编辑</button>
+            </div>
+            <table id="tb_params" width="1400px">
+            </table>
+            <style>
+                .datagrid-btable tr{height:50px;}
+            </style>
+        </div>
+        <div class="page-content" id="limitPage">
+        limitPage
+        </div>
+        <div class="page-content" id="othersPage">
+        othersPage
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+// $.ajax({
+//     method : "get",
+//     url : "/app/getParams",
+//     success :function(data, textStatus){              
+//         $("#tb_Params").datagrid("loadData",{rows:data,total:data.total});    
+                                                                                                    
+//     },
+//     error:function(XMLHttpRequest, textStatus, errorThrown){
+//     }
+// });  
+</script>
+
+
+
+
+
+
+
+<div id="Warning" class="subModel">
+    <div class="title">
+        <span class="warning-tab selected" id="rules"><%-locals.ml("Send Rules")%></span>
+        <span class="warning-tab" id="email"><%-locals.ml("Email Setting")%></span>
+        <span class="warning-tab" id="sms"><%-locals.ml("SMS Setting")%></span>
+    </div>
+    <div class="warning-tab-pannel">
+        <div class="page-content" id="rulesPage">
+            <div>*</div>
+            <div style="margin-left:20px;margin-bottom:38px">
+                <div id='category'></div>
+                <span style="float: left;margin-left: 5px;color:#000"><%-locals.ml("category")%>：</span>
+                <div class="saveEmailAndSMS" style='float:right;margin-right:10%;display:none'>
+                    <a href="#"  class="easyui-linkbutton" style="width:100px;height:40px;" data-options="iconCls:'icon-search'"><%-locals.ml("Save")%></a>
+                </div>
+            </div>
+            <hr style="width:auto" />
+            <div style='margin-top:10px'>
+                <div class="grid" style="width:auto;height:700px;"></div>
+            </div>
+        </div>
+        <div class="page-content" id="emailPage">
+            <div class="left">
+                <div>
+                 <%-locals.ml("Email Server setting")%>
+                </div>
+                <div class="tr" >
+                    <img src="/images/server.png" width="36px"/ style=" display: inline; ">
+                    <span class="lb"> <%-locals.ml("Serverr")%></span>
+                    <input id="txtEmailServer"  class="easyui-textbox" required="true"  type="text" value=""></input>
+                </div>
+                <div class="tr">
+                    <img src="/images/email.png" width="36px"/ style=" display: inline; ">
+                    <span  class="lb"> <%-locals.ml("From")%></span>
+                    <input id="txtEmailFromAddr"  class="easyui-textbox" data-options="required:true,validType:'email'" value=""></input>
+                </div>
+                <div class="tr">
+                    <img src="/images/locker.png" width="36px"/ style=" display: inline; ">
+                    <span class="lb"> <%-locals.ml("Password")%></span>
+                    <input id="txtPwd"  class="easyui-textbox"  type="password" value="" required="true" ></input>
+                </div>
+                <div style="margin-top:30px;float:right; margin-right: 10px;">
+                   <a id="btnSaveEmailServer" href="#" class="easyui-linkbutton"  data-options="width:100"> <%-locals.ml("Save")%></a>  
+                </div>
+            </div>
+            <div class="left">
+                <div >
+                     <img src="/images/email.png" width="32px" style=" display: inline; vertical-align:middle;">
+                     <%-locals.ml("Email Reciver List")%>
+                </div>
+                <div class="tr">
+                    <input  id="newReciverAddr" type="text"   class="easyui-textbox" data-options="required:true,validType:'email'" style="margin-right: 20px;"> </input>
+                    <a id="btnAddEmail" href="#" class="easyui-linkbutton" data-options="width:100"><%-locals.ml("Add")%></a>
+                </div>
+                <div class="tr">
+                    <div style="float:left;width:130px; height:200px;border: solid 2px #A9A9A9;margin-right: 20px;">
+                        <ul  id="ulEmailList" style="font-size: 14px;padding: 0">
+                        </ul>
+                    </div>
+                    <a id="delAddEmail" href="#" class="easyui-linkbutton" data-options="width:100"><%-locals.ml("Delete")%></a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content" id="smsPage">
+        sms
+        </div>
+    </div>
+</div>
+<div id="Authority" class="subModel" style="background-color: #E0E0E0" >
+    <div id="a_content">
+	    <div id="toolbar">
+	        <a href="#" id="btnAdd" class="myButton"><%-locals.ml('New')%></a>
+	        <a href="#" id="btnEdit" class="myButton btnDisable"><%-locals.ml('Edit record')%></a>
+	        <a href="#" id="btnDel" class="myButton btnDisable"><%-locals.ml('deletes')%></a>
+	        <a href="#" id="btnSave" class="myButton btnDisable"><%-locals.ml('Post edit')%></a>
+	        <a href="#" id="btnCancel" class="myButton btnDisable"><%-locals.ml('Cancle')%></a>
+	        <a href="#" id="btnEditPasswd" class="myButton btnDisable"><%-locals.ml('Setup Password')%></a>
+	    </div>
+	    <hr/>
+	    <table id="tb_user">
+	    </table>
+		<form id="editDialog" method='get' style="width:250px;">
+			<div style="width:250px;margin-left:20px;margin-top:40px;font-size:20px" id='oldPassword' ><%-locals.ml('Old Password')%>:<input style="margin-left:4px;height:25px;width:160px;font-size:18px" value='' /></div>
+			<div style="width:250px;margin-left:20px;margin-top:15px;font-size:20px"  id='newPassword'><%-locals.ml('New Password')%>:<input style="margin-left:4px;height:25px;font-size:18px;width:160px;" value='' /></div>
+			<div id="editPasswdConfirm" style="margin-left:60px;height:32px;font-size:20px;margin-top:40px;width:65px"  class="easyui-linkbutton" onclick = "editPasswdConfirm()">
+		    <%-locals.ml("OK")%>
+		    </div>  
+		    <div id="editPasswdClose" style="margin-left:40px;margin-top:40px;font-size:20px;height:32px;width:65px"  class="easyui-linkbutton" onclick = "editPasswdClose()">
+		    <%-locals.ml("Close")%>
+		    </div>    
+		</form>	   
+    </div>
+</div>
+<style>
+    .myButton:hover{
+        background-color:#E3E3E3;
+    }
+    .myButton {
+        -moz-box-shadow: 0px 0px 0px 0px #ffffff;
+        -webkit-box-shadow: 0px 0px 0px 0px #ffffff;
+        box-shadow: 0px 0px 0px 0px #ffffff;
+        background-color:#ffffff;
+        -moz-border-radius:10px;
+        -webkit-border-radius:10px;
+        border-radius:10px;
+        border:1px solid #dcdcdc;
+        display:inline-block;
+        cursor:pointer;
+        color:#666666;
+        font-family:Arial;
+        font-size:20px;
+        padding:11px 29px;
+        text-decoration:none;
+        text-shadow:0px -2px 1px #ffffff;
+    }
+    .myButton:active {
+        position:relative;
+        top:5px;
+    }
+    .btnDisable:active {
+        position:relative;
+        top:0px;
+        cursor:default;
+    }
+    .btnDisable {
+        background-color: #E3E3E3;
+        cursor:default;
+    }
+    #btnAdd:before{
+        background: url("/images/add.png") no-repeat left center transparent;
+            content:  "\0000a0";
+        display: inline-block;
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+        margin: 0 4px -6px -4px;
+        position: relative;
+        top: 0px;
+        left: -7px;
+        background-size: 100% 100%;
+    }
+    #btnEdit:before{
+        background: url("/images/edit.png") no-repeat left center transparent;
+        content:  "\0000a0";
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        line-height: 24px;
+        margin: 0 4px -6px -4px;
+        position: relative;
+        top: 0px;
+        left: -7px;
+        background-size: 100% 100%;
+    }
+    #btnDel:before{
+        background: url("/images/del.png") no-repeat left center transparent;
+        content:  "\0000a0";
+        display: inline-block;
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+        margin: 0 4px -6px -4px;
+        position: relative;
+        top: 0px;
+        left: -7px;
+        background-size: 100% 100%;
+    }
+    .datagrid-row{
+        height: 40px;
+    }
+    .datagrid-cell{
+        font-size: 20px;
+    }
+    .datagrid-header-row{
+        height: 35px;
+    }
+    .datagrid-header .datagrid-cell span {
+        font-size: 18px;
+    }
+    .datagrid-row-alt{
+        background:#96D5E6;
+    }
+    .datagrid-header-check>input{
+        display: none
+    }
+    #a_content{
+        width: 90%;
+        margin: 0px auto;
+        margin-top: 40px;
+        border:2px solid #9DA1A5 ;
+        padding: 20px 40px;
+        box-shadow: 2px 2px 1px 1px #9DA1A5;
+        border-radius: 10px;
+    }
+    hr{
+        width: 1000px;
+        margin-left: -1px;
+    }
+    #toolbar{
+        margin-bottom: 20px;
+    }
+    .panel-body {
+      border: 2px solid #9DA1A5;
+    }
+    .l-btn-text{
+        font-size:16px;
+    }
+    .panel-title{
+        font-size:16px;
+    }
+    .title{
+        margin: 0 auto;
+        margin-top:10px;
+        width: 97%;
+        height: 45px;
+        line-height:45px;
+        background-color: #E5E8E8;
+        align:center;
+    }
+    .page-content{
+        background-color: #fff;
+        margin: 0 auto;
+        width: 97%;
+    }
+    .title :first-child{
+        margin-left: 20px;
+    }
+    .title span{
+        color: #6C6C6C;
+        font-size: 24px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    .title .selected{
+        border-bottom: solid 2px #00A1A6;
+    }
+    .page-content{
+        display: none;
+    }
+    .warning-tab-pannel div:nth-child(1){
+        display: block;
+
+    }
+    #emailPage .left{
+        margin: 0 auto;
+        margin-left: 100px;
+        margin-top: 50px;
+        float: left;
+        width: 40%;
+        height: 400px;
+        color:black;
+        font-size: 24px;
+    }
+    div.tr{
+       margin-top: 80px;
+    }
+    div.tr img{
+        margin-left: 100px;
+        float: left;
+         vertical-align:middle;
+    }
+    div.tr span.lb{
+        float: left;
+        display:block;
+        margin-left:20px;
+        width: 100px;
+        margin-right: 20px;
+    }
+    div.tr input{
+        width: 130px;
+    }
+
+    @media screen and (min-width:1366px){
+        .page-content{
+                height: 800px;
+        }
+
+    }
+    @media screen and (max-width:1366px){
+            .page-content{
+                height: 520px;
+        }
+    }
+</style>
+<script type="text/javascript"> 
+(function(){
+    var g_ScreenFlat=$(window).width()>1366?true:false;
+    var editRow = undefined;  
+	setUserPasswdDialog();
+    var alarmColumns=[{
+        field:'WarningName',
+        align:'center',
+        title:'<%-locals.ml("Name")%>',
+        width:800,
+        height:100,
+        sortable:true
+        },{
+            field:'Email',
+            align:'center',
+            title:'<%-locals.ml("Email")%>',
+            width:200,
+            height:100,
+            sortable:true,
+            // editor:{
+            //     type:'checkbox',
+            //     options:{
+            //         on:'1',off:'0'
+            //     }
+            // },
+            formatter:function(value,rowData,index){
+                if(value==1){
+                    return '<input name="EmailCheckBox" type="checkbox" checked="checked"/> '
+                }else{
+                    return '<input name="EmailCheckBox" type="checkbox" /> '
+                }
+            }
+        },{
+            field:'SMS',
+            align:'center',
+            title:'<%-locals.ml("SMS")%>',
+            width:200,
+            height:100,
+            sortable:true,
+            // editor:{
+            //     type:'checkbox',
+            //     options:{
+            //         on:'1',off:'0'
+            //     }
+            // },
+            formatter:function(value,rowData,index){
+                if(value==1){
+                    return '<input name="SMSCheckBox" type="checkbox" checked="checked" /> '
+                }else{
+                    return '<input name="SMSCheckBox" type="checkbox" /> '
+                }
+                
+            }
+            // editor: { 
+            //     type: 'checkbox',
+            //     options: {
+            //         on:"1",
+            //         off:"0"
+            //     }                           
+            // }
+        }
+    ];
+	$("#btnAdd").click(function(){
+		$("#btnEdit").addClass("btnDisable");
+		$("#btnDel").addClass("btnDisable");
+	    $("#btnEditPasswd").addClass("btnDisable");
+		$("#btnSave").removeClass("btnDisable");
+		$("#btnCancel").removeClass("btnDisable");
+		if(editRow != undefined) {
+        	$("#tb_user").datagrid("endEdit", editRow);
+        }
+        //添加时如果没有正在编辑的行，则在datagrid的第一行插入一行
+        if(editRow == undefined) {
+            $("#tb_user").datagrid("insertRow", {
+                index: 0, // index start with 0
+                row: {
+                }
+            });
+            //将新插入的那一行开户编辑状态
+            $("#tb_user").datagrid("beginEdit", 0);
+            //给当前编辑的行赋值
+            editRow = 0;
+        }                 	     
+	});    
+	$("#btnEdit").click(function(){  	   
+		var rows =  $("#tb_user").datagrid("getChecked");
+		if ($(this).hasClass("btnDisable"))
+        {
+            return ;
+        }
+		if((rows.length > 0)&&(rows[0].id!=3)) {
+			$("#btnSave").removeClass("btnDisable");
+			$("#btnCancel").removeClass("btnDisable"); 
+			$("#btnDel").addClass("btnDisable");
+		    $("#btnEditPasswd").addClass("btnDisable");		
+	        //如果只选择了一行则可以进行修改，否则不操作
+	        if(rows.length == 1) {
+	        	//修改之前先关闭已经开启的编辑行，当调用endEdit该方法时会触发onAfterEdit事件
+	            if(editRow != undefined) {
+	            	$("#tb_user").datagrid("endEdit", editRow);                 
+	            }
+	            //当无编辑行时
+	            if(editRow == undefined) {
+	            	//获取到当前选择行的下标
+	                var index =  $("#tb_user").datagrid("getRowIndex", rows[0]);
+	                //开启编辑
+	                $("#tb_user").datagrid("beginEdit", index);
+	                //把当前开启编辑的行赋值给全局变量editRow
+	                editRow = index;
+	                var cellEdit=$('#tb_user').datagrid('getEditor', { index: index, field: 'UserPassword'});	
+	                cellEdit.target.hide();	                         	                            
+   		   			//var $input = cellEdit.target; // 得到文本框对象
+					//$input.prop('readonly',true); // 设值只读	                
+	                //当开启了当前选择行的编辑状态之后，
+	                //应该取消当前列表的所有选择行，要不然双击之后无法再选择其他行进行编辑
+	                 $("#tb_user").datagrid("unselectAll");                  	
+	             }
+	         }
+	         
+	     }else{	     			      
+	     	 //yjMessager.showDialog("error",'超級用戶不能編輯，請選擇普通用戶要編輯的行',"");
+	     }       	
+	}); 
+	$("#btnSave").click(function(){ 		
+        if ($(this).hasClass("btnDisable"))
+        {	
+            return ;
+        }
+        $("#btnEdit").addClass("btnDisable");
+		$("#btnSave").addClass("btnDisable");
+		$("#btnCancel").addClass("btnDisable");
+		$("#btnDel").addClass("btnDisable");
+	    $("#btnEditPasswd").addClass("btnDisable");
+    	$("#tb_user").datagrid("endEdit", editRow);             
+    });
+ 	$("#btnCancel").click(function(){		
+        if ($(this).hasClass("btnDisable"))
+        {      	
+            return ;
+        }
+        $("#btnEdit").addClass("btnDisable");
+		$("#btnSave").addClass("btnDisable");
+		$("#btnCancel").addClass("btnDisable");
+		$("#btnDel").addClass("btnDisable");
+	    $("#btnEditPasswd").addClass("btnDisable");
+    	editRow = undefined;
+    	$("#tb_user").datagrid("rejectChanges");
+    	$("#tb_user").datagrid("unselectAll");        		       		
+   	});   
+    $("#btnDel").click(function(){  	  
+        if ($(this).hasClass("btnDisable"))
+        {
+            return ;
+        }
+    	var rows = $("#tb_user").datagrid("getChecked");        
+    	//选择要删除的行
+    	if((rows.length > 0)&&(rows[0].id!=3)) {   
+    		$("#btnEdit").addClass("btnDisable");
+	    	$("#btnEditPasswd").addClass("btnDisable");        
+         	yjMessager.showConfirmDialog(
+				"Confirm!",
+				'<%-locals.ml("Are you sure you want to delete it?")%>',
+				{	
+					onOK : function(){
+						$.ajax({
+						    method : "get",
+						   	data:rows[0],
+						    url : "/app/deleteUserInfo",
+						    success :function(data, textStatus){
+		    			           $('#tb_user').datagrid('reload',rows[0]);			       					        										        
+						    },
+						    error:function(XMLHttpRequest, textStatus, errorThrown){
+						    }
+						});	
+						$("#btnEdit").addClass("btnDisable");
+		   		    	$("#btnDel").addClass("btnDisable");
+		   		    	$("#btnEditPasswd").addClass("btnDisable");					
+					},
+					onCancel : function(){						
+					}
+				}
+			);              
+        }
+        else {
+         	yjMessager.showDialog("error",'<%-locals.ml("Please select the line you want to delete")%>',"");
+        }                     	      		                                            		
+    });
+    $("#btnEditPasswd").click(function(){
+        if ($(this).hasClass("btnDisable"))
+        {
+            return ;
+        }
+    	var rows = $("#tb_user").datagrid("getChecked"); 
+	    if(rows.length >0){
+	    	setUserPasswdDialog();
+		 	$("#editDialog").form('reset');	 	      
+	    	$("#editDialog").dialog("open");
+    	}else{
+    		yjMessager.showDialog("error",'<%-locals.ml("Please select a row to modify the password")%>',"");
+    	}
+    });
+    var alarmChoose=[
+        {'alarmTypeHidden':'EEIPCS_PCS_PLC_ALARMS_W1','alarmTypeDisplay':'ALARMS_PLC_W1'},
+        {'alarmTypeHidden':'EEIPCS_PCS_PLC_ALARMS_W2','alarmTypeDisplay':'ALARMS_PLC_W2'},
+        {'alarmTypeHidden':'EEIPCS_PCS_INV_ALARMS_W1','alarmTypeDisplay':'INV_ALARMS_W1'},
+        {'alarmTypeHidden':'EEIPCS_PCS_INV_ALARMS_W2','alarmTypeDisplay':'INV_ALARMS_W2'},
+        {'alarmTypeHidden':'EEIPCS_PCS_BOOST_ALARMS_W1','alarmTypeDisplay':'BBS1_ALARMS_W1'},
+        {'alarmTypeHidden':'EEIPCS_PCS_BOOST_ALARMS_W2','alarmTypeDisplay':'BBS2_ALARMS_W1'},
+        {'alarmTypeHidden':'EEIPCS_PCS_BATT_ALARMS','alarmTypeDisplay':'BBS2_ALARMS_W2'}
+    ];
+    var json={
+        "total":0,
+        "rows":[]
+    };
+    $('.grid').datagrid({
+        fitColumns:true,
+        pagination:true,
+        nowarp : false,
+        striped: true,
+        fitColumns:true,
+        columns:[alarmColumns],
+        onBeforeLoad:function(param){
+            $('.panel-body').css('border','0')
+        }
+    }).datagrid('loadData',json);
+    $('#category').combobox({
+        valueField:'alarmTypeHidden',
+        textField:'alarmTypeDisplay',
+        onSelect:function(){
+            var alarmTypeText=$('#category').combobox('getText');
+            $('.saveEmailAndSMS').css('display','block');
+            $.ajax({
+                method:'get',
+                data:{
+                    alarmTypeText:alarmTypeText
+                },
+                url:'/app/setting/getWarningRules',
+                success:function(data,textStatus){
+                    loadDatagrid(data,$('.grid'),alarmColumns);
+                }
+            })
+        }
+    }).combobox('loadData',alarmChoose);
+    function editPasswdConfirm(){	   			
+		var newPasswd=$("#newPassword input")[0].value;
+		var oldPasswd=$("#oldPassword input")[0].value;
+		if(newPasswd==""||newPasswd==null||oldPasswd==""||oldPasswd==null){
+			yjMessager.showDialog("error",'<%-locals.ml("Password can not be empty")%>',"");
+			return;
+		}else{                        
+			var rowData = $("#tb_user").datagrid("getChecked");  
+			rowData[0].newUserPassword=newPasswd;	
+			rowData[0].oldUserPassword=oldPasswd;					
+			$.ajax({
+	    		method : "get",
+			   	data:rowData[0],
+			    url : "/app/updateUserInfo",
+			    success :function(data, textStatus){	
+				    if(data=="fail"){
+					    yjMessager.showDialog("error",'<%-locals.ml("The original password is incorrect, modify the password failed")%>',"");
+						$("#editDialog").form('reset');	 
+				    }else{	
+				     	$('#tb_user').datagrid('reload',data[0]);				    	 								    	
+			    		$("#editDialog").dialog("close"); 
+			    	} 						      						    		  			           			       					        										        
+			    },
+			    error:function(XMLHttpRequest, textStatus, errorThrown){
+			    }
+			});
+		} 													     
+    }
+    function editPasswdClose(){
+    	$("#editDialog").dialog("close");
+    }   
+    function setUserPasswdDialog(){
+    	$("#editDialog").dialog({
+			height : 250,
+			width : 300,
+			modal : true,
+			title : '<%-locals.ml("Setup Password")%>',
+			closed : true,
+			onClose : function(event, ui) {				
+				 },
+			onOpen : function(){				
+				}		  
+	 	}); 
+    }
+    subNavChanged=function(){
+        //subNavDisplaying
+        $("#tb_user").datagrid({
+	        pagination:true,
+		   	//rownumbers:true,
+		   	pagePosition:'bottom',			
+	        width:g_ScreenFlat?1480:1000,
+	        sortOrder:'asc',
+	        sortName:'id',
+	        nowarp : false,
+	        idField : "id",
+	        singleSelect : true,
+	        striped:true,
+	        // border : false,
+	        pageSize : 10,	      
+	        checkbox:true,
+	        columns : [[
+	            {
+	            	field:'ck',
+	            	checkbox:true,
+	            	width:'50'
+	            },{
+	                title : '<%-locals.ml("NO.")%>',
+	                field : "id",
+	                width : g_ScreenFlat?285:190,
+	                align:'center',
+	                sortable: true,
+	                formatter : function(value,row,rowIndex){  		                              	              
+	                	return rowIndex+1;
+	                }	                
+	            },{
+	                title : '<%-locals.ml("Account name")%>',
+	                field : "name",
+	                width : g_ScreenFlat?285:190,
+	                align:'center',
+	                sortable: true,
+	                editor: { 
+	                	type: 'textbox',
+	                	 options: {
+		                    required: true
+		                }		                 	
+	                }
+	            },{
+	                title : '<%-locals.ml("Registered person")%>',
+	                field : "regName",
+	                width :g_ScreenFlat?285:190,
+	                align:'center',
+	                sortable: true,
+	                editor: { 
+	                	type: 'textbox',	                	
+		                options: {
+		                    required: true
+		                }	                 	
+	                }
+	            },{
+	                title : '<%-locals.ml("Password")%>',
+	                field : "UserPassword",
+	                width : g_ScreenFlat?285:190,
+	                align:'center',
+	                sortable: true,
+	                editor: { 
+	                	type: 'text',	                	
+		                options: {
+		                    required: true
+		                }	                 	
+	                },
+	                formatter:function(value){
+	                	return '<div>*******</div>';
+	                }
+	            },{
+	                title : '<%-locals.ml("Authority level")%>',
+	                field : "BuildingName",
+	                width : g_ScreenFlat?285:190,
+	                align : "center",
+	                sortable: true,
+	                formatter : function(value,row){                    	              
+	                	if(row.name=="Admin"){
+	                		return '<div><%-locals.ml("Super user")%></div>';
+	                	}else{
+	                		return '<div><%-locals.ml("Ordinary users")%></div>';
+	                	}
+	                }
+	            }]
+			],
+            onBeforeLoad:function(param){
+				$.ajax({
+				    method : "get",
+				   	data:param,
+				    url : "/app/getUser",
+				    success :function(data, textStatus){		      
+			            var pageData=yjDB.dataSet2ObjectList(data.meta,data.rows);
+                       
+						$("#tb_user").datagrid("loadData",{rows:pageData,total:data.total});	
+									       					        										        
+				    },
+				    error:function(XMLHttpRequest, textStatus, errorThrown){
+				    }
+				});		   		
+   		    },
+   		    onCheck: function (index, row){
+	   		    if((row.id!=undefined)&&(row.id!=3)){
+	   		    	$("#btnAdd").removeClass("btnDisable");
+	   		    	$("#btnEdit").removeClass("btnDisable");
+	   		    	$("#btnDel").removeClass("btnDisable");
+	   		    	$("#btnEditPasswd").removeClass("btnDisable");
+	   		    }else{
+	   		    	$("#btnEdit").addClass("btnDisable");
+	   		    	$("#btnDel").addClass("btnDisable");
+	   		    	$("#btnEditPasswd").addClass("btnDisable");
+	   		    }		   	
+   		    }, 
+   		    onAfterEdit: function (rowIndex, rowData, changes) {
+   		   		if((rowData.id!=undefined)&&(rowData.id!=3)){
+   		   			$.ajax({
+			    		method : "get",
+					   	data:rowData,
+					    url : "/app/updateUserInfo",
+					    success :function(data, textStatus){
+					    	  editRow = undefined;
+					    	  $('#tb_user').datagrid('reload',rowData);						        
+					    },
+					    error:function(XMLHttpRequest, textStatus, errorThrown){
+					    }
+					});  
+				}  
+				if(rowData.id==undefined){
+                	$.ajax({
+					    method : "get",
+					   	data:rowData,
+					    url : "/app/insertUserInfo",
+					    success :function(data, textStatus){
+					    	editRow=undefined;						    			    			           			       					        										        
+					    },
+					    error:function(XMLHttpRequest, textStatus, errorThrown){
+					    }
+					});	
+					$('#tb_user').datagrid('reload',rowData);	
+                
+                }                 
+            }                	   		             
+        });             
+    }
+    //  warning page
+    function renderWarningPage(){
+        $(".warning-tab").click(function(){
+            $(".warning-tab").removeClass('selected');
+            $(this).addClass('selected');
+            $(".page-content").css("display","none");
+            $("#"+$(this).attr("id")+"Page").css("display","block");
+        });
+        $("#ulEmailList").delegate("li", "click", function(){
+            $(this).css("background-color","#338FFF");
+            $(this).attr("status","selected");
+            $("[status=selected]").remove();
+        });
+        $.ajax({
+            url: '/app/setting/getEmailServerConfig',
+            type: 'get',
+            dataType: 'json',
+            data: {},
+        })
+        .done(function(data) {
+
+            $('#txtEmailServer').textbox("setValue",data[0].Server);
+            $('#txtEmailFromAddr').textbox("setValue",data[0].FromAddr);
+            $('#txtPwd').textbox("setValue",data[0].Password);
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        $.ajax({
+            url: '/app/setting/getAllReciverAddr',
+            type: 'get',
+            dataType: 'json',
+            data: {},
+        })
+        .done(function(data) {
+            for(var i=0;i<data.length;i++){
+                var temp=$("<li style='list-style-type:none;margin-top:5px;'>"+data[i].ReciverAddr+"</li >")
+                $("#ulEmailList").append(temp);
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+        $("#btnSaveEmailServer").bind('click',function(){
+            if( !$('#txtEmailFromAddr').textbox("isValid")){
+               return;
+            }
+            $.ajax({
+                url: '/app/setting/saveEmailServerConfig',
+                type: 'get',
+                dataType: 'json',
+                data: {server: $("#txtEmailServer").val(),
+                       fromAddr:$("#txtEmailFromAddr").val(),
+                       pwd:$("#txtPwd").val().trim()},
+            })
+            .done(function() {
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });  
+        })
+        $("#btnAddEmail").bind('click',function(){
+            if( !$('#newReciverAddr').textbox("isValid")){
+               return;
+            }
+             $.ajax({
+                url: '/app/setting/addNewReciverAddr',
+                type: 'get',
+                dataType: 'json',
+                data: {reciverAddr:$('#newReciverAddr').val()},
+            })
+            .done(function() {
+               var temp=$("<li style='list-style-type:none;margin-top:5px;'>"+ $('#newReciverAddr').textbox("getValue",'')+"</li >")
+                $("#ulEmailList").append(temp);
+                $('#newReciverAddr').textbox("setValue",'');
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+        }) 
+    }
+    renderWarningPage();
+
+    // paramss page
+    function renderParamsPage(){
+        $(".warning-tab").click(function(){
+            $(".warning-tab").removeClass('selected');
+            $(this).addClass('selected');
+            $(".page-content").css("display","none");
+            $("#"+$(this).attr("id")+"Page").css("display","block");
+        });
+
+        // $.ajax({
+        //     method : "get",
+        //     url : "/app/getParams",
+        //     success :function(data, textStatus){        
+        //     $("#tb_Params").datagrid("loadData",{rows:data,total:data});
+        //         console.log(data);                                         
+        //     },
+        //     error:function(XMLHttpRequest, textStatus, errorThrown){
+        // }
+        // });  
+        // load params 
+        // $("#tb_params").datagrid({
+        //     pagination:true,
+        //     //rownumbers:true,
+        //     pagePosition:'bottom',          
+        //     width:g_ScreenFlat?1480:1000,
+        //     sortOrder:'asc',
+        //     sortName:'id',
+        //     nowarp : false,
+        //     idField : "id",
+        //     singleSelect : true,
+        //     striped:true,
+        //     // border : false,
+        //     pageSize : 10,        
+        //     checkbox:true,
+        //     columns : [[
+        //         {
+        //             title : '<%-locals.ml("DeviceDataMetaOID.")%>',
+        //             field : "DeviceDataMetaOID",
+        //             width : g_ScreenFlat?285:190,
+        //             align:'center',
+        //             sortable: true,
+        //             hidden:true,
+        //             formatter : function(value,row,rowIndex){                                                     
+        //                 return rowIndex+1;
+        //             }               
+        //         },{
+        //             title : '<%-locals.ml("item")%>',
+        //             field : "id",
+        //             width : g_ScreenFlat?350:250,
+        //             align:'center',
+        //             sortable: true        
+        //         },{
+        //             title : '<%-locals.ml("Value")%>',
+        //             field : "name",
+        //             width : g_ScreenFlat?285:190,
+        //             align:'center',
+        //             sortable: true,
+        //             editor: { 
+        //                 type: 'textbox',
+        //                  options: {
+        //                     required: true
+        //                 }                           
+        //             }
+        //         },{
+        //             title : '<%-locals.ml("Unit")%>',
+        //             field : "regName",
+        //             width :g_ScreenFlat?285:190,
+        //             align:'center',
+        //             sortable: true,
+        //             editor: { 
+        //                 type: 'textbox',                        
+        //                 options: {
+        //                     required: true
+        //                 }                       
+        //             }
+        //         }]
+        //     ],                                      
+        // });     
+    }
+    function loadDatagrid(data,datagridDiv,columns){
+        var editCheckBox=0;
+        var EmailFlag=0;
+        var SMSFlag=0;
+        var keepAllCheckDataObj={};
+        var EmailCheckFlag;
+        var SMSCheckFlag;
+        datagridDiv.datagrid({
+            loadMsg:'数据加载中请稍后.....',
+            nowarp : false,
+            pageSize : 20,
+            striped: true,
+            data:data,
+            singleSelect:true,
+            fitColumns:true,
+            pagination:true,
+            rownumbers:true,
+            columns:[columns],
+            onCheck: function (index, rowData){
+                if(editCheckBox){
+                    editCheckBox=0;
+                    if(keepAllCheckDataObj[rowData.WarningAID]==undefined){
+                        keepAllCheckDataObj[rowData.WarningAID]={};
+                        if(EmailFlag){
+                            EmailFlag=0;
+                            keepAllCheckDataObj[rowData.WarningAID].Email=EmailCheckFlag;
+                        }
+                        if(SMSFlag){
+                            SMSFlag=0;
+                            keepAllCheckDataObj[rowData.WarningAID].SMS=SMSCheckFlag;
+                        }
+                        keepAllCheckDataObj[rowData.WarningAID].WarningOID=rowData.WarningOID;
+                    }else{
+                        if(EmailFlag){
+                            EmailFlag=0;
+                            keepAllCheckDataObj[rowData.WarningAID].Email=EmailCheckFlag;
+                        }
+                        if(SMSFlag){
+                            SMSFlag=0;
+                            keepAllCheckDataObj[rowData.WarningAID].SMS=SMSCheckFlag;
+                        }
+                        keepAllCheckDataObj[rowData.WarningAID].WarningOID=rowData.WarningOID;
+                    }
+                    $('.saveEmailAndSMS').click(function(){
+                        $.ajax({
+                            method:'get',
+                            data:{
+                                changeCheckData:keepAllCheckDataObj
+                            },
+                            url:'/app/setting/modifyWarningRules',
+                            success:function(data,textStatus){
+                                $.messager.show({
+                                    title:'info',
+                                    msg:data,
+                                    timeout:3000,
+                                    showType:'slide'
+                                })
+                            }
+                        })
+                    })
+                }
+            },
+            onBeforeLoad:function(data){
+                $('input[name=EmailCheckBox]').click(function(){
+                    $('.saveEmailAndSMS').unbind('click');
+                    editCheckBox=1;
+                    EmailFlag=1;
+                    if(this.checked==true){
+                        EmailCheckFlag=1
+                    }else{
+                        EmailCheckFlag=0
+                    }
+                })
+                $('input[name=SMSCheckBox]').click(function(){
+                    $('.saveEmailAndSMS').unbind('click');
+                    editCheckBox=1;
+                    SMSFlag=1;
+                    if(this.checked==true){
+                        SMSCheckFlag=1
+                    }else{
+                        SMSCheckFlag=0
+                    }
+                })
+            }
+        })
+    }
+    renderParamsPage();
+})();
+
+
+$(function(){
+    var editRow = undefined;
+    var rows;
+    $('#tb_params').datagrid({
+        url:'/app/setting/getParams', 
+        method:'get',
+        singleSelect:true,
+        pagination:true,
+        columns:[[
+            {field:'checkbox',title:'checkbox',checkbox:true,align:'center'},
+            {field:'ParamOID',title:'ParamOID',width:350,align:'center'},
+            {field:'ParamName',title:'ParamName',width:350,align:'center'},     
+            {field:'Value',title:'Value',width:350,align:'center',editor:{
+                        type: 'textbox',                        
+                        options: {
+                            required: true
+                        }                       
+            }},
+            {field:'UOMAID',title:'UOMAID',width:350,align:'center'},
+        ]],
+        rowStyler:function(index,row){
+            if(index%2===0){
+                return 'background-color:#77FFEE;';
+            }else{
+                return 'background-color:#FFEE99;';
+            }
+        }
+    });
+    $("#edit").click(function(){
+        rows=$('#tb_params').datagrid('getChecked');
+        if(rows.length==1){
+            if(editRow!=undefined){
+                $('#tb_params').datagrid("cancelEdit",editRow);
+                editRow=undefined;
+            }
+            if(editRow==undefined){
+                var index=$('#tb_params').datagrid("getRowIndex",rows[0]);
+                $('#tb_params').datagrid("beginEdit",index);
+                editRow=index;
+                var cellEdit=$('#tb_params').datagrid("getEditor",{index:index,field:'Value'});
+                $('#tb_params').datagrid("unselectAll");
+            }
+        }
+    });
+    $("#save").click(function(){
+        if(editRow!=undefined){
+            $("#tb_params").datagrid("endEdit",editRow);
+        }
+    });
+    $("#tb_params").datagrid({
+        onAfterEdit:function(rowIndex,rowData,changes){
+        $.ajax({
+            method:"get",
+            data:rowData,
+            url:"/app/setting/updataParams",
+            success:function(){
+                alert("保存成功");
+                editRow=undefined;
+            },
+            error:function(){
+                alert("保存失败");
+            }
+        });
+    },  
+    });
+    $("#undo").click(function(){
+        $("#tb_params").datagrid("cancelEdit",editRow);
+    });
+    $("#remove").click(function(){
+        rows=$('#tb_params').datagrid('getChecked');
+        var index=$('#tb_params').datagrid("getRowIndex",rows[0]);
+        $('#tb_params').datagrid("deleteRow",index);
+        $.ajax({
+            method:"get",
+            data:rows,
+            url:"/app/setting/deleteParams",
+            success:function(){
+                alert("删除成功");
+            },
+            error:function(){
+                alert("删除失败");
+            }
+        });
+    });
+});
+</script>

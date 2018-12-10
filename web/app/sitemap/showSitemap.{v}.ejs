@@ -1,0 +1,34 @@
+<% layout(locals.global.theme_layout_dir+'/master.ejs') -%>
+<style>
+	.process{
+		width:200px;
+		margin-right:10px;
+		/* border:1px dotted; */
+	}
+</style>
+<div style="margin:8px">
+<% function dumpNodes(nodes){%>
+	<% for(var i=0;i<nodes.length;i++){ %> 
+		
+		<% if (nodes[i].children && nodes[i].children.length>0){ %>	
+		
+				<h2>
+					<% if (nodes[i].data.ImageAID){%>
+						<img src="<%=nodes[i].data.ImageAID%>" style="height:16px;padding-top:2px;"/>
+	    			<%}%><%-nodes[i].data.Name%>
+	    		</h2>
+				<br/>
+				<div style="margin-left: 30px;margin-bottom:20px">
+					<% dumpNodes(nodes[i].children); %>
+				</div>	
+		<% }else{ %> 
+			<a class="process" href="<%-nodes[i].data.Route%>" onclick="return onNodeClick();">
+				<% if (nodes[i].data.ImageAID){%>
+					<img src="<%=nodes[i].data.ImageAID%>" style="height:16px;padding-top:2px;"/>
+	    		<%}%><%-nodes[i].data.Name%>
+			</a>
+		<% }%>
+	<% }%>
+<% }%>
+<% dumpNodes(locals.data)%>
+</div>

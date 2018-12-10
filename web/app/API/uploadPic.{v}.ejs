@@ -1,0 +1,126 @@
+<html>
+
+<header>
+	<style>
+#div_previewImages img {
+	width: 100px;
+}
+</style>
+	<!-- http://wangyong31893189.iteye.com/blog/1695472 -->
+</header>
+<body>
+	<span>(1)预览图片：</span>
+	<br />
+	<div id="div_previewImages"></div>
+
+	<input type="file" name="myHead" multiple="multiple" id="fileToUpload"
+		onchange="fileSelected();" />
+	<input type="button" onclick="uploadFile()" value="Upload" />
+
+	<input type="button" onclick="deleteFile()" value="delete" />
+	<div id="progressNumber"></div>
+	<span>(2)从服务器显示图片：</span>
+	<br />
+	<div id="div_images"></div>
+	<script>
+		function fileSelected() {
+			var files = document.getElementById('fileToUpload').files;
+			var div = document.getElementById('div_previewImages');
+			for ( var i = 0; i < files.length; i++) {
+				var img = document.createElement("img");
+				div.appendChild(img);
+				var reader = new FileReader();
+				(function(img) {
+					reader.onload = function(evt) {
+						img.src = evt.target.result;
+					}
+				})(img);
+				reader.readAsDataURL(files[i]);
+				/* else if (files.value) {
+					img.src = files.value; */
+			}
+		}
+		function uploadFile() {
+			var fd = new FormData();
+			var files = document.getElementById('fileToUpload').files;
+			for ( var i = 0; i < files.length; i++) {
+				fd.append(i, files[i]);
+			}
+			var xhr = new XMLHttpRequest();
+			xhr.upload.addEventListener("progress", uploadProgress, false);
+			xhr.addEventListener("load", uploadComplete, false);
+			xhr.addEventListener("error", uploadFailed, false);
+			xhr.addEventListener("abort", uploadCanceled, false);
+			xhr.open("POST", "/system.files.upload");
+			xhr.send(fd);
+		}
+		function uploadProgress(evt) {
+			if (evt.lengthComputable) {
+				var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+				var span = document.createElement("span");
+				span.innerHTML = percentComplete.toString() + '% - ';
+				document.getElementById('progressNumber').appendChild(span);
+			} else {
+				document.getElementById('progressNumber').innerHTML =
+					'unable to compute';
+			}
+		}
+
+		var g_uploaded = null;
+
+		function uploadComplete(evt) {
+			if (evt.target.status != 200) {
+				alert(evt.target.responseText);
+				return;
+			}
+			/* 服务器端返回响应时候触发event事件*/
+			//var img=document.getElementById('img_show');
+			var div = document.getElementById('div_images');
+			//alert(evt.target.responseText);
+			g_uploaded = JSON.parse(evt.target.responseText);
+			//alert(obj[0].key);
+			var span = document.createElement("span");
+			span.innerHTML = JSON.stringify(g_uploaded.fields);
+			div.appendChild(span);
+			div.appendChild(document.createElement("br"));
+			for ( var name in g_uploaded.files) {
+				var file=g_uploaded.files[name];
+				for (var i=0;i<file.length;i++){
+					if (file[i].status == "success") {
+						var span = document.createElement("span");
+						var url = "/system.files.download/" + file[i].key;
+						span.innerHTML = url;
+						div.appendChild(span);
+						div.appendChild(document.createElement("br"));
+						var img = document.createElement("img");
+						img.src = url;
+						div.appendChild(img);
+						div.appendChild(document.createElement("br"));
+					} else {
+						alert(file[i].errorMessage);
+					}
+				}
+			}
+		}
+		function uploadFailed(evt) {
+			alert("There was an error attempting to upload the file.");
+		}
+		function uploadCanceled(evt) {
+			alert("The upload has been canceled by the user or the browser dropped the connection.");
+		}
+
+		function deleteFile() {
+//		alert(JSON.stringify(g_uploaded.files));
+			for ( var name in g_uploaded.files) {
+				var xhr = new XMLHttpRequest();
+				
+//				alert(JSON.stringify(g_uploaded.files[0][0].key));
+
+				xhr.open("delete", "/system.files/"
+					+ g_uploaded.files[name][0].key);//修改成自己的接口
+				xhr.send();
+			}
+		}
+	</script>
+</body>
+</html>

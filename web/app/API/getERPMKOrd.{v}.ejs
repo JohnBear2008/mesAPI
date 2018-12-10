@@ -1,0 +1,35 @@
+<% layout(locals.global.theme_layout_dir+'/master.ejs') -%>
+
+ 
+<script type="text/javascript">
+
+    $(function(){
+     
+           
+            
+            
+            $.ajax({
+                method:'get',
+                data:{"MKOrdNO":"1812HE010"},
+                url:"/app/API/getPrdMKOrdMain",
+                success:function(data,textStatus){
+                	
+                	alert(JSON.stringify(data));
+//                    $("#combox_bear").combobox({ 
+//                        valueField: 'catid',
+//                        textField: 'catName'
+//                    });
+//                    
+//                    $("#combox_bear").combobox("loadData",data);
+//                    $("#combox_bear").combobox("select",data[0].catid);
+                },
+                error:function(){
+    
+                }
+            })
+            
+
+            
+        
+    }); 
+</script>

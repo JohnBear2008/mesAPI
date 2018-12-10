@@ -1,0 +1,239 @@
+<div class="container-fluid">
+    <div id="green-Container"  >
+    </div> 
+         <div id="green-Total-title"> </div> 
+         <div id="green-TotalContainer" class="green-TotalContainer" > 111111111</div>
+         <div id="green-YearContainer" class="green-YearContainer" >
+         </div>
+</div>
+
+<script type="text/javascript">
+    var date=new Date();
+    var year=date.getFullYear();
+    var month=date.getMonth();
+    var day=date.getDate();
+    
+    
+    $(function(){
+        g_subProcesses.renderBearPic=function(){
+        	
+        	
+        	
+        	//定义更新子页信息函数
+        	 function updateTabInfo(data){
+                 
+                 for(var i=0;i<data.length;i++){
+                     $("#nowData"+data[i].DeviceEntityOID).html((data[i].nowData));
+                     $("#dayData"+data[i].DeviceEntityOID).html((data[i].dayData));
+                     $("#monthData"+data[i].DeviceEntityOID).html((data[i].monthData));
+                     $("#yearData"+data[i].DeviceEntityOID).html((data[i].yearData));
+                     var chartReaTime=$('#chartContainer'+data[i].DeviceEntityOID).highcharts();
+                     var seriesTemp= chartReaTime.get('Solar Generating');
+                     if(seriesTemp){
+                         seriesTemp.addPoint([data[i].time, parseFloat(data[i].nowData)]);
+                     }
+                 }
+             }
+        	//定义更新子页信息函数
+        	 
+        	 
+        	 
+        	 
+        	 var date=new Date();
+             var year=date.getFullYear();
+             var month=date.getMonth();
+             var day=date.getDate();
+             var dataNowTemp=new Array();
+             for (var i=0;i<97;i++){
+                 dataNowTemp.push(null);
+             }
+             var yDayDataDefault=[];
+             var yMonthDataDefault=[];
+             var yYearDataDefault=[];
+             for(var i=0;i<24;i++){
+                 yDayDataDefault.push(null);
+             }
+             for(var i=0;i<12;i++){
+                 yYearDataDefault.push(null);
+             }
+             var getXDataOfMonth=function(month,year){
+                 var xData=[];
+                 var count=getDaysInMonth(month,year);
+                 for (var i=0;i<count;i++){
+                     xData.push(i+1);
+                     yMonthDataDefault.push(null);
+                 }
+                 return xData;
+             };
+             
+             
+                 // js 判断 每个月多少天
+             function getDaysInMonth(month,year){    
+                  var days;    
+                  if (month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
+                      days=31
+                  } else if (month==4 || month==6 || month==9 || month==11){
+                      days=30;
+                  } else {    
+                      if (isLeapYear(year)) {
+                          days=29; 
+                      }else{
+                          days=28; 
+                      }    
+                  }    
+                  return (days);    
+             } // js 判断 每个月多少天
+             
+           //定义X轴显示数值 
+             var xDataDay=['00:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
+             var xDataMonth=getXDataOfMonth(month+1,year);
+             var xDataYear=['<%-locals.ml("Jan")%>', '<%-locals.ml("Feb")%>', '<%-locals.ml("Mar")%>', '<%-locals.ml("April")%>', '<%-locals.ml("May")%>', '<%-locals.ml("Jun")%>','<%-locals.ml("July")%>', '<%-locals.ml("August")%>', '<%-locals.ml("September")%>', '<%-locals.ml("Oct")%>', '<%-locals.ml("Nov")%>', '<%-locals.ml("Dec")%>'];
+           //定义X轴显示数值 
+             
+             
+             
+             //定义数据面板
+             $.ajax({
+                 method : "get",
+                 data : {                                    
+                 },
+                 url : "/app/green/getGreenChartTabInfo",
+                 success :function(data, textStatus){
+                     $("#green-Container").html("");
+                     var translation={
+                         realTimePowerEffciency:<%-locals.ml('Real Time',true)   %>,
+                         dailyPowerGenera:<%-locals.ml('Day',true)%>,
+                         monthAvgPowerGenera:<%-locals.ml('Month',true)%>,
+                         yearAvgPowerGenera:<%-locals.ml('Year',true)%>
+
+                     };    
+                     var html =ejs.render(data[1],{
+                         locals:data[0],
+                         translation:translation                    
+                     }); 
+                     $("#green-Container").append(html); 
+                     var tt ="<%-locals.ml("Illuminancy")%>" +" VS " +"<%-locals.ml("Real Power")%>";
+                     $("#green-Total-title").append(tt);
+                     
+                     for(var i=0;i<data[0].length;i++){
+                         // 显示 每个tab 的第一个图 ：即时发电效率曲线 
+
+                         doChart("now",$("#chartContainer"+data[0][i].DeviceEntityOID),data[0][i].DeviceEntityOID);
+                     } 
+                       // 如果开始就绑定事件，后面动态添加的元素事件监测不到
+                     
+                     $(".tabs").delegate("li", "click", function(){
+                         $(this).siblings().
+                         removeClass('active').end().addClass('    active');
+                         var chartContainer=$(this).parent().siblings();
+                         //chartContainer188
+                         var idTemp=$(chartContainer).attr("id");
+                         var deviceEntityOID=idTemp.substring(14,idTemp.length);
+                         var dateType=$(this).attr("dateType");
+                         doChart(dateType,chartContainer,deviceEntityOID);  
+                     }); 
+                     $.ajax({
+                         method:'get',
+                         data:'',
+                         url: "/app/green/getRealTimeGreenChartTabInfo",
+                         success:function(data, textStatus){
+                         },
+                         error:function(data, textStatus){
+
+                         }
+                     })
+                 },
+                 error:function(XMLHttpRequest, textStatus, errorThrown){
+                 }
+             });//定义数据面板
+             
+             //定义划线函数
+             var doChart=function(dateType,chartContainer,DeviceEntityOID){
+                 var xData;
+                 var yData;
+                 var title;
+                 var name='<%-locals.ml("Generating capacity")%>';
+                 if(dateType=="now"){
+                     doNowChart(chartContainer,DeviceEntityOID);
+                     return;
+                 }else{
+                     $.ajax({
+                         url: '/app/green/getGreenEnergyGeneratedByDateType',
+                         type: 'get',
+                         dataType: 'json',
+                         data: {dateType:dateType, DeviceEntityOID:DeviceEntityOID},
+                     })
+                     .done(function(data) {
+                         if(dateType=="day"){
+                             xData=xDataDay;
+                             yDataDefault=yDayDataDefault;
+                         }else if(dateType=="month"){
+                             xData=xDataMonth;
+                             yDataDefault=yMonthDataDefault;
+                         }else{
+                             xData=xDataYear;
+                             yDataDefault=yYearDataDefault;
+                         }
+                         yData=data;
+                         $(chartContainer).highcharts({
+                             chart: {
+                                 zoomType:'x'
+                             },
+                             title: {
+                                 text: title,
+                                 x: -20 //center,
+                             },
+                             credits:{
+                                 enabled:false
+                             },
+                             xAxis: {
+                                 categories: xData
+                             },
+                             yAxis: {
+                                 title: {
+                                     text: '<%-locals.ml("Generating capacity")%>'+' (kWh)'
+                                 },
+                                 labels : {
+                                     formatter : function () {
+                                         var strVal = this.value + '';
+                                         if (strVal.indexOf('.') == -1) {
+                                             return strVal + '.0';
+                                         } else {
+                                             return parseFloat(strVal).toFixed(1)
+                                         }
+                                     }
+                                 }
+                             },
+                             tooltip: {
+                                 valueSuffix: 'kWh',
+                                 valueDecimals:2
+                             },
+                             series: [{
+                                 name: "default",
+                                 data: yDataDefault,
+                                 showInLegend:false
+                             },{
+                                 name: name,
+                                 data: yData,
+                                 color:'#8BF77E',
+                                 showInLegend:false
+                             }]
+                         });
+                     })
+                     .fail(function() {
+                     })
+                     .always(function() {
+                     }); 
+                 }
+             };
+           //定义划线函数
+             
+             
+             
+
+             
+             
+        }  
+       
+    })
+</script>

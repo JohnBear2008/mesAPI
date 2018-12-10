@@ -1,0 +1,105 @@
+<style type="text/css">
+    #bearIllumation{
+        padding-left: 0;
+    }
+</style>
+<div class="container-fluid">
+    <div class="div_wrap">
+        <div class="content_load">
+            <div class="div_toolbar">
+                <img class="img_toolbar" src="/images/title-bg-left.png"/>
+                <img class="icon-device-type" src="/images/pv.png">
+                <span class="span_greenName" ><%-locals.ml("Illumation")%>11111111111</span>
+            </div>
+            <div class="tabs-content chartOptimizer" id="bearIllumation" >
+            
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){            
+        g_subProcesses.renderBearPic=function(){
+      $.ajax({
+                method : "get",
+                data : {
+                },
+                url : "/app/green/getIllumationChartData",
+                success :function(data, textStatus){
+          
+                    $("#bearIllumation").highcharts({
+                        chart: {
+                            zoomType:'x'
+                        },
+                        title: {
+                            text: ''
+                        },
+                        credits: {
+                            enabled: false
+                        }, 
+                        xAxis: {
+                            type: 'datetime',
+                            labels: {
+                                overflow: 'justify'
+                            }                        
+                        },
+                        yAxis: {
+                            // allowDecimals:false,
+                            title: {
+                                 text: '<%-locals.ml("Illumation")%>'+' w/m²'
+                            },
+                            labels : {
+                                formatter : function () {
+                                    var strVal = this.value + '';
+                                    if (strVal.indexOf('.') == -1) {
+                                        return strVal + '.0';
+                                    } else {
+                                        return parseFloat(strVal).toFixed(1)
+                                    }
+                                }
+                            }
+                        },
+                        tooltip: {
+                            valueSuffix: ' w/m²',
+                            valueDecimals:2
+                        },
+                        plotOptions: {
+                            spline: {
+                                lineWidth: 4,
+                                states: {
+                                    hover: {
+                                        lineWidth: 5
+                                    }
+                                },
+                                marker: {
+                                    enabled: false
+                                }, 
+                                ccolor: '',
+                            }
+                        },
+                        series: [{
+                            id:"default",
+//                            data:[[Date.UTC(year, month, day, 0, 0, 0),null],[Date.UTC(year, month, day, 23, 59, 59),null]],
+                            data:[],
+                            showInLegend: false
+                        },{
+                            id:'Illumation',
+                            name:'<%-locals.ml("Illumation")%>',
+                            data:data,
+                            color: '#8BF77E',
+                            showInLegend: false
+                        }],
+                        navigation: {
+                            menuItemStyle: {
+                                fontSize: '10px'
+                            }
+                        }
+                    }); 
+    
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                }
+            });      
+        }
+    })
+</script>
