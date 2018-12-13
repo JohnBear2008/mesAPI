@@ -1,0 +1,24 @@
+[2018-12-13T09:55:20.482] [ERROR] dateFileLog - { Error: connect ETIMEDOUT
+    at PoolConnection.Connection._handleConnectTimeout (D:\work\MESAPI\node_modules\mysql\lib\Connection.js:346:13)
+    at Object.onceWrapper (events.js:313:30)
+    at emitNone (events.js:106:13)
+    at Socket.emit (events.js:208:7)
+    at Socket._onTimeout (net.js:422:8)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+    --------------------
+    at Protocol._enqueue (D:\work\MESAPI\node_modules\mysql\lib\protocol\Protocol.js:135:48)
+    at Protocol.handshake (D:\work\MESAPI\node_modules\mysql\lib\protocol\Protocol.js:52:41)
+    at PoolConnection.connect (D:\work\MESAPI\node_modules\mysql\lib\Connection.js:109:18)
+    at Pool.getConnection (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:45:23)
+    at Pool.releaseConnection (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:135:10)
+    at Pool._removeConnection (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:247:8)
+    at Pool._purgeConnection (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:228:8)
+    at Ping.onPing [as _callback] (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:90:12)
+    at Ping.Sequence.end (D:\work\MESAPI\node_modules\mysql\lib\protocol\sequences\Sequence.js:96:24)
+    at D:\work\MESAPI\node_modules\mysql\lib\protocol\Protocol.js:390:18
+  errorno: 'ETIMEDOUT',
+  code: 'ETIMEDOUT',
+  syscall: 'connect',
+  fatal: true }

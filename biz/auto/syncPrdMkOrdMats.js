@@ -2,12 +2,13 @@ var yjDBService_sqlserver = global.yjRequire("yujiang.Foil","yjDBService.engine.
 var yjDBService = global.yjRequire("yujiang.Foil").yjDBService;
 var yjDB = global.yjRequire("yujiang.Foil").yjDB;
 var yjDBServiceUtil=global.yjRequire("yujiang.Foil",'yjDBService.util.js');
+
+
 var connectionOptions=yjGlobal.config.db_Connection.erp_Connection.connection;
+
 var connectionOptionsMES=yjGlobal.config.db_Connection.mesapi_Connection.connection;
 
-
-
-
+var async = require('async');
 var connection=null;
     if(connectionOptions){
 	    	connection=yjDBServiceUtil.extractConnectionOptions(connectionOptions);
@@ -21,7 +22,7 @@ var connectionMES=null;
 //	    	console.log("connectionMES:"+JSON.stringify(connectionMES))
 	}
 	    
-    var getsql=" select a.MKOrdNO,b.Action from prdmkordmain a,(select  PKValue,Action from comChangeLog where   changetime>= DATEADD(minute,-5, GETDATE()+2)  and ProgID='CHIProdt.InnMkOrd')b where a.MKOrdNO=b.PKValue";
+    var getsql=" select a.MkOrdNO,a.SubProdID,b.Action from prdMkOrdMats a,(select PKValue,Action from comChangeLog where   changetime>= DATEADD(minute,-5, GETDATE()+2)) b where a.MkOrdNO=b.PKValue ";
     //getsql 为从erp抓取数据的sql语句,可修改
     
     var postsql="insert into dataaynchmappings (ProjectName,TableName,ID,Name,SynchMold,SynchFlag,SynchType,CreateTime) values(?,?,?,?,?,?,?,?)"
@@ -47,6 +48,10 @@ var connectionMES=null;
     }
     	
     	
+    	
+
+
+
 
 ////------------------------------------	    
 var schedule = require("node-schedule");
@@ -84,7 +89,7 @@ function ERPtoMES(){
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
-            console.log("get生产制令主表data:"+JSON.stringify(data));
+            console.log("get生产制令子表data:"+JSON.stringify(data));
             //插入mes-----------------
             
             if(data.length!=0){
@@ -109,9 +114,9 @@ function ERPtoMES(){
             			
             			connectionOptions:connectionMES,
                         sql: postsql,
-                        parameters: ["ERP","prdMKOrdMain",data[i].MKOrdNO,data[i].MKOrdNO,"API","0",SynchType,CreateTime],
+                        parameters: ["ERP","prdMkOrdMats",data[i].MkOrdNO,data[i].SubProdID,"API","0",SynchType,CreateTime],
                         success: function(result) {
-                        	console.log("生产制令主表插入成功!")
+                        	console.log("生产制令子表插入成功!")
                         },
                         error: {}
                     });

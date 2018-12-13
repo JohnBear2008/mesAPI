@@ -30,25 +30,36 @@ module.exports = function(sender) {
 //    }
 //    
 //    console.log("connection:"+JSON.stringify(connection));
-
-    yjDBService.exec({
+    
+    console.log("sql:"+sql);
+    
+    if(sql!=undefined){
     	
-        connectionOptions:connection,
-        sql : sql,
-        parameters : [MKOrdNO],
-        rowsAsArray : true,
-        success : function(result) {
-            var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
-            
-            
-//            console.log("result:"+JSON.stringify(result));
-//            
-            console.log("data:"+JSON.stringify(data));
-//            
-            var mesData={return:true,Message:'',Data:data}
+    	 yjDBService.exec({
+    	    	
+    	        connectionOptions:connection,
+    	        sql : sql,
+    	        parameters : [MKOrdNO],
+    	        rowsAsArray : true,
+    	        success : function(result) {
+    	            var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
+    	            
+    	            
+//    	            console.log("result:"+JSON.stringify(result));
+//    	            
+    	            console.log("data:"+JSON.stringify(data));
+//    	            
+    	            var mesData={return:true,Message:'',Data:data}
 
-            sender.success(mesData);
-        },
-        error : sender.error
-    });
+    	            sender.success(mesData);
+    	        },
+    	        error : sender.error
+    	    });
+    	
+    	
+    }else{
+    	sender.error('请输入参数!');
+    }
+
+   
 }

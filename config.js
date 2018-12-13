@@ -8,26 +8,26 @@ var g_dbConenctions = {
 	        password: '654321',
 	        insecureAuth: true
 	}, 
-	"mesapi_Connection" : {
-	 engine: "mysql",
-  	  connection:{
-  	   server : '127.0.0.1',
-  	   database : 'mesapi',
-  	   user: 'root',
-       password: '654321',
-  	  }
-	},
-	
 //	"mesapi_Connection" : {
-//		 engine: "mysql",
-//	  	  connection:{
-//	  	   server : '10.10.0.21',
-//	  	   database : 'iMES_Component_API',
-//	  	   user: 'demo',
-//	  	   port:'3308',
-//	       password: 'test',
-//	  	  }
-//		},
+//	 engine: "mysql",
+//  	  connection:{
+//  	   server : '127.0.0.1',
+//  	   database : 'mesapi',
+//  	   user: 'root',
+//       password: '654321',
+//  	  }
+//	},
+	
+	"mesapi_Connection" : {
+		 engine: "mysql",
+	  	  connection:{
+	  	   server : '10.10.0.25',
+	  	   database : 'iMES_Component_API',
+	  	   user: 'demo',
+	  	   port:'3308',
+	       password: 'test',
+	  	  }
+		},
     
     "erp_Connection" : {
     	  engine:"sqlserver",
@@ -35,7 +35,7 @@ var g_dbConenctions = {
     	  connection:{
     	   driver : "SQL Server Native Client 11.0",
     	   server : '192.168.0.2',
-    	   database : 'CHIComp01',
+    	   database : 'CHIComp99',
     	   user: 'sa',
          password: 'techDG2218',
     	  }

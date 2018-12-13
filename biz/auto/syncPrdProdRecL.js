@@ -2,12 +2,13 @@ var yjDBService_sqlserver = global.yjRequire("yujiang.Foil","yjDBService.engine.
 var yjDBService = global.yjRequire("yujiang.Foil").yjDBService;
 var yjDB = global.yjRequire("yujiang.Foil").yjDB;
 var yjDBServiceUtil=global.yjRequire("yujiang.Foil",'yjDBService.util.js');
+
+
 var connectionOptions=yjGlobal.config.db_Connection.erp_Connection.connection;
+
 var connectionOptionsMES=yjGlobal.config.db_Connection.mesapi_Connection.connection;
 
-
-
-
+var async = require('async');
 var connection=null;
     if(connectionOptions){
 	    	connection=yjDBServiceUtil.extractConnectionOptions(connectionOptions);
@@ -20,11 +21,16 @@ var connectionMES=null;
 	    	
 //	    	console.log("connectionMES:"+JSON.stringify(connectionMES))
 	}
-	    
-    var getsql=" select a.MKOrdNO,b.Action from prdmkordmain a,(select  PKValue,Action from comChangeLog where   changetime>= DATEADD(minute,-5, GETDATE()+2)  and ProgID='CHIProdt.InnMkOrd')b where a.MKOrdNO=b.PKValue";
+//    BillNO		
+//    BillDate		
+//    ProdID		
+//    SerNO		
+//    ProdID		
+
+    var getsql="select b.Action,a.BillNO,a.ProdID from comprodrec a,(select PKValue,Action from comChangeLog where changetime>= DATEADD(minute,-5, GETDATE()+2) and ProgID='ChiProdt.TakeMat' ) b where a.BillNO=b.PKValue and a.Flag=330";
     //getsql 为从erp抓取数据的sql语句,可修改
     
-    var postsql="insert into dataaynchmappings (ProjectName,TableName,ID,Name,SynchMold,SynchFlag,SynchType,CreateTime) values(?,?,?,?,?,?,?,?)"
+    var postsql="insert into dataaynchmappings (ProjectName,TableName,ID,Name,SourceFlag,SynchMold,SynchFlag,SynchType,CreateTime) values(?,?,?,?,?,?,?,?,?)"
     //postsql 为向中间数据库插入数据的sql语句	
     	
     	
@@ -47,6 +53,10 @@ var connectionMES=null;
     }
     	
     	
+    	
+
+
+
 
 ////------------------------------------	    
 var schedule = require("node-schedule");
@@ -64,7 +74,7 @@ var schedule = require("node-schedule");
     	
     	 CreateTime = new Date().Format("yyyy-MM-dd HH:mm:ss");
     	   
-//      console.log("CreateTime:"+JSON.stringify(CreateTime));
+ //       console.log("CreateTime:"+JSON.stringify(CreateTime));
 	
     	ERPtoMES();
 
@@ -84,7 +94,7 @@ function ERPtoMES(){
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
-            console.log("get生产制令主表data:"+JSON.stringify(data));
+            console.log("get领料data:"+JSON.stringify(data));
             //插入mes-----------------
             
             if(data.length!=0){
@@ -109,9 +119,9 @@ function ERPtoMES(){
             			
             			connectionOptions:connectionMES,
                         sql: postsql,
-                        parameters: ["ERP","prdMKOrdMain",data[i].MKOrdNO,data[i].MKOrdNO,"API","0",SynchType,CreateTime],
+                        parameters: ["ERP","comProdRec",data[i].BillNO,data[i].ProdID,"330","API","0",SynchType,CreateTime],
                         success: function(result) {
-                        	console.log("生产制令主表插入成功!")
+                        	console.log("领料插入成功!")
                         },
                         error: {}
                     });
@@ -121,6 +131,8 @@ function ERPtoMES(){
             	
             }
 
+           
+            
             
         },
         error : {}

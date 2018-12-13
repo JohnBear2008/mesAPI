@@ -5,15 +5,11 @@ var yjDBServiceUtil=global.yjRequire("yujiang.Foil",'yjDBService.util.js');
 var connectionOptions=yjGlobal.config.db_Connection.erp_Connection.connection;
 var connectionOptionsMES=yjGlobal.config.db_Connection.mesapi_Connection.connection;
 
-
-
-
 var connection=null;
     if(connectionOptions){
 	    	connection=yjDBServiceUtil.extractConnectionOptions(connectionOptions);
 	}
-    
-    
+
 var connectionMES=null;
     if(connectionOptionsMES){
 	    	connectionMES=yjDBServiceUtil.extractConnectionOptions(connectionOptionsMES);
@@ -21,13 +17,12 @@ var connectionMES=null;
 //	    	console.log("connectionMES:"+JSON.stringify(connectionMES))
 	}
 	    
-    var getsql=" select a.MKOrdNO,b.Action from prdmkordmain a,(select  PKValue,Action from comChangeLog where   changetime>= DATEADD(minute,-5, GETDATE()+2)  and ProgID='CHIProdt.InnMkOrd')b where a.MKOrdNO=b.PKValue";
+    var getsql="select a.ClassID,b.Action from comProductClass a,(select PKValue,Action from comChangeLog where  changetime>= DATEADD(minute,-5, GETDATE()+2) and  ProgID='CHIComm.ProductClass') b where a.ClassID=b.PKValue";
     //getsql 为从erp抓取数据的sql语句,可修改
     
     var postsql="insert into dataaynchmappings (ProjectName,TableName,ID,Name,SynchMold,SynchFlag,SynchType,CreateTime) values(?,?,?,?,?,?,?,?)"
     //postsql 为向中间数据库插入数据的sql语句	
-    	
-    	
+
 //-------------------------------
     	
     	Date.prototype.Format = function (fmt) {
@@ -74,8 +69,7 @@ var schedule = require("node-schedule");
 
 
 function ERPtoMES(){
-	
-	
+
 	yjDBService_sqlserver.exec({
     	
         connectionOptions:connection,
@@ -84,7 +78,7 @@ function ERPtoMES(){
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
-            console.log("get生产制令主表data:"+JSON.stringify(data));
+            console.log("get产品类别data:"+JSON.stringify(data));
             //插入mes-----------------
             
             if(data.length!=0){
@@ -109,16 +103,14 @@ function ERPtoMES(){
             			
             			connectionOptions:connectionMES,
                         sql: postsql,
-                        parameters: ["ERP","prdMKOrdMain",data[i].MKOrdNO,data[i].MKOrdNO,"API","0",SynchType,CreateTime],
+                        parameters: ["ERP","comProductClass",data[i].ClassID,data[i].ClassID,"API","0",SynchType,CreateTime],
                         success: function(result) {
-                        	console.log("生产制令主表插入成功!")
+                        	console.log("产品类别插入成功!")
                         },
                         error: {}
                     });
             	}
-            	
-            	 
-            	
+
             }
 
             

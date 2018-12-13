@@ -91,3 +91,33 @@ Cannot read property 'AID' of undefined
     at Function.render (D:\work\MESAPI\node_modules\express\lib\application.js:591:3)
     at ServerResponse.render (D:\work\MESAPI\node_modules\express\lib\response.js:961:7)
   path: 'D:\\work\\MESAPI\\yujiang.Foil.Node.WebServer\\app\\system\\sitemap\\showSitemap.{v}.ejs' }
+[2018-12-10T15:53:13.334] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0]未准备关联语句
+  sqlstate: 'HY007',
+  code: 0,
+  sql: ' select a.MKOrdNO,b.Action from prdMKOrdMain a,(select PKValue,Action from comChangeLog where   changetime>= DATEADD(minute,-5, GETDATE()+2)) b where a.MKOrdNO=b.PKValue ' }
+[2018-12-10T15:53:13.339] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0]未准备关联语句
+  sqlstate: 'HY007',
+  code: 0,
+  sql: ' select a.MKOrdNO,b.Action from prdMKOrdMain a,(select PKValue,Action from comChangeLog where   changetime>= DATEADD(minute,-5, GETDATE()+2)) b where a.MKOrdNO=b.PKValue ' }
+[2018-12-10T16:15:39.628] [ERROR] dateFileLog - Error: 'config.security.isNeedSession' must set to true.
+    at module.exports (D:\work\MESAPI\yujiang.Foil.Node.WebServer\app\account\showLogin.{get}.{m}.js:4:16)
+    at buildData (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:187:6)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:129:5
+    at Object.module.exports.read (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.cache.js:78:4)
+    at loadData (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:123:15)
+    at rrnmv (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:120:2)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:223:4
+    at Layer.handle [as handle_request] (D:\work\MESAPI\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\work\MESAPI\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (D:\work\MESAPI\node_modules\express\lib\router\route.js:112:3)
+[2018-12-10T17:00:00.893] [ERROR] dateFileLog - ReferenceError: CreateTime is not defined
+    at success (D:\work\MESAPI\mesAPI\biz\auto\syncPrdMKOrdMain.js:111:56)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:139:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:191:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)

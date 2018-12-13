@@ -21,11 +21,16 @@ var connectionMES=null;
 	    	
 //	    	console.log("connectionMES:"+JSON.stringify(connectionMES))
 	}
-	    
-    var getsql=" select a.MKOrdNO,b.Action from prdMKOrdMain a,(select PKValue,Action from comChangeLog where   changetime>= DATEADD(minute,-5, GETDATE()+2)) b where a.MKOrdNO=b.PKValue ";
+//    BillNO		
+//    BillDate		
+//    ProdID		
+//    SerNO		
+//    ProdID		
+
+    var getsql="select b.Action,a.BillNO,a.ProdID from comprodrec a,(select PKValue,Action from comChangeLog where changetime>= DATEADD(minute,-5, GETDATE()+2) and ProgID='ChiProdt.TakeMat' ) b where a.BillNO=b.PKValue and a.Flag=311";
     //getsql 为从erp抓取数据的sql语句,可修改
     
-    var postsql="insert into dataaynchmappings (ProjectName,TableName,ID,Name,SynchMold,SynchFlag,SynchType,CreateTime) values(?,?,?,?,?,?,?,?)"
+    var postsql="insert into dataaynchmappings (ProjectName,TableName,ID,Name,SourceFlag,SynchMold,SynchFlag,SynchType,CreateTime) values(?,?,?,?,?,?,?,?,?)"
     //postsql 为向中间数据库插入数据的sql语句	
     	
     	
@@ -50,9 +55,7 @@ var connectionMES=null;
     	
     	
 
-var CreateTime = new Date().Format("yyyy-MM-dd HH:mm:ss");
-   
-  //  console.log("CreateTime:"+JSON.stringify(CreateTime));
+
 
 
 ////------------------------------------	    
@@ -68,6 +71,10 @@ var schedule = require("node-schedule");
  //rule.second=  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59 ];  
      
     schedule.scheduleJob(rule, function(){ 
+    	
+    	 CreateTime = new Date().Format("yyyy-MM-dd HH:mm:ss");
+    	   
+//     console.log("CreateTime:"+JSON.stringify(CreateTime));
 	
     	ERPtoMES();
 
@@ -77,6 +84,8 @@ var schedule = require("node-schedule");
 
 
 function ERPtoMES(){
+	
+	
 	yjDBService_sqlserver.exec({
     	
         connectionOptions:connection,
@@ -85,7 +94,7 @@ function ERPtoMES(){
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
-            console.log("data:"+JSON.stringify(data));
+            console.log("get入库data:"+JSON.stringify(data));
             //插入mes-----------------
             
             if(data.length!=0){
@@ -104,14 +113,15 @@ function ERPtoMES(){
             		}
             		
 //            		console.log("SynchType:"+SynchType);
+ //           		console.log("CreateTime:"+JSON.stringify(CreateTime));
             		
             		yjDBService.exec({
             			
             			connectionOptions:connectionMES,
                         sql: postsql,
-                        parameters: ["ERP","prdMKOrdMain",data[i].MKOrdNO,"厂内制令主表","API","0",SynchType,CreateTime],
+                        parameters: ["ERP","comProdRec",data[i].BillNO,data[i].ProdID,"311","API","0",SynchType,CreateTime],
                         success: function(result) {
-                        	console.log("1111111111插入成功!")
+                        	console.log("入库插入成功!")
                         },
                         error: {}
                     });
