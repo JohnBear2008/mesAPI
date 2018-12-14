@@ -17,7 +17,7 @@ var connectionMES=null;
 //	    	console.log("connectionMES:"+JSON.stringify(connectionMES))
 	}
 	    
-    var getsql="select a.ProdID,b.Action from comproduct a,(select PKValue,Action from comChangeLog where  changetime>= DATEADD(minute,-5, GETDATE()+2) and  ProgID='CHIComm.Product') b where a.ProdID=b.PKValue ";
+    var getsql="select a.ProdID,a.ProdName,b.Action from comproduct a,(select PKValue,Action from comChangeLog where  changetime>= DATEADD(minute,-5, GETDATE()+2) and  ProgID='CHIComm.Product') b where a.ProdID=b.PKValue ";
     //getsql 为从erp抓取数据的sql语句,可修改
     
     var postsql="insert into dataaynchmappings (ProjectName,TableName,ID,Name,SynchMold,SynchFlag,SynchType,CreateTime) values(?,?,?,?,?,?,?,?)"
@@ -103,7 +103,7 @@ function ERPtoMES(){
             			
             			connectionOptions:connectionMES,
                         sql: postsql,
-                        parameters: ["ERP","comproduct",data[i].ProdID,data[i].ProdID,"API","0",SynchType,CreateTime],
+                        parameters: ["ERP","comproduct",data[i].ProdID,data[i].ProdName,"API","0",SynchType,CreateTime],
                         success: function(result) {
                         	console.log("产品插入成功!")
                         },

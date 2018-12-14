@@ -20,7 +20,7 @@ module.exports = function(sender) {
     console.log("数据类型:"+typeof(ClassID));
     
     if(typeof(ClassID)=="string"){
-    	var sql="select ClassID,ClassName from comProductClass Where ClassID =?";
+    	var sql="select f.UserID,f.UserName,e.ClassID,e.ClassID,e.ClassName from comProductClass e,( select c.PersonID as UserID,c.PersonName as UserName,d.PKValue from comperson c,(select a.PKValue,a.UserName from comChangeLog a inner join (select PKValue ,max(changetime)as changetime from comChangeLog where   ProgID='CHIComm.ProductClass' group by PKValue  ) b on a.PKValue=b.PKValue and a.ChangeTime=b.changetime) d where c.PersonID=d.UserName) f where e.ClassID=f.PKValue and PKValue=?";
     }
     
 //    if(typeof(ClassID)=="object"){
@@ -31,7 +31,6 @@ module.exports = function(sender) {
 //    console.log("connection:"+JSON.stringify(connection));
 
     yjDBService.exec({
-    	
         connectionOptions:connection,
         sql : sql,
         parameters : [ClassID],
@@ -39,9 +38,8 @@ module.exports = function(sender) {
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
             
-            
 //            console.log("result:"+JSON.stringify(result));
-//            
+
             console.log("data:"+JSON.stringify(data));
 //            
             var mesData={return:true,Message:'',Data:data}

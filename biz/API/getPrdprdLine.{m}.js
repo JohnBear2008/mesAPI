@@ -13,21 +13,21 @@ module.exports = function(sender) {
     
     var getinfo=sender.req.query;
     
-    var WareHouseID=sender.req.query.WareHouseID;
+    var LineID=sender.req.query.LineID;
     console.log("getinfo:"+JSON.stringify(getinfo));
     
   
-    console.log("数据类型:"+typeof(WareHouseID));
+    console.log("数据类型:"+typeof(LineID));
     
-    if(typeof(WareHouseID)=="string"){
-    	var sql="select f.UserID,f.UserName,e.WareHouseID,e.WareHouseName from comWareHouse e,( select c.PersonID as UserID,c.PersonName as UserName,d.PKValue from comperson c,(select a.PKValue,a.UserName from comChangeLog a inner join (select PKValue ,max(changetime)as changetime from comChangeLog where   ProgID='CHIComm.WareHouse' group by PKValue  ) b on a.PKValue=b.PKValue and a.ChangeTime=b.changetime) d where c.PersonID=d.UserName) f where e.WareHouseID=f.PKValue and PKValue=?";
+    if(typeof(LineID)=="string"){
+    	var sql="select f.UserID,f.UserName,e.LineId,e.LineName from prdPrdLine e,( select c.PersonID as UserID,c.PersonName as UserName,d.PKValue from comperson c,(select a.PKValue,a.UserName from comChangeLog a inner join (select PKValue ,max(changetime)as changetime from comChangeLog where   ProgID='CHIProdt.PrdLine' group by PKValue  ) b on a.PKValue=b.PKValue and a.ChangeTime=b.changetime) d where c.PersonID=d.UserName) f where e.LineID=f.PKValue and PKValue=?";
     	
 
     }
     
-//    if(typeof(WareHouseID)=="object"){
+//    if(typeof(LineID)=="object"){
 //
-//    	  var sql="select * from prdMKOrdMain Where WareHouseID in('333','444') ";
+//    	  var sql="select * from prdMKOrdMain Where LineID in('333','444') ";
 //    }
 //    
 //    console.log("connection:"+JSON.stringify(connection));
@@ -36,7 +36,7 @@ module.exports = function(sender) {
     	
         connectionOptions:connection,
         sql : sql,
-        parameters : [WareHouseID],
+        parameters : [LineID],
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);

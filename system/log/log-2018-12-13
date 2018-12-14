@@ -22,3 +22,103 @@
   code: 'ETIMEDOUT',
   syscall: 'connect',
   fatal: true }
+[2018-12-13T13:55:20.144] [ERROR] dateFileLog - { Error: connect ETIMEDOUT
+    at PoolConnection.Connection._handleConnectTimeout (D:\work\MESAPI\node_modules\mysql\lib\Connection.js:346:13)
+    at Object.onceWrapper (events.js:313:30)
+    at emitNone (events.js:106:13)
+    at Socket.emit (events.js:208:7)
+    at Socket._onTimeout (net.js:422:8)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+    --------------------
+    at Protocol._enqueue (D:\work\MESAPI\node_modules\mysql\lib\protocol\Protocol.js:135:48)
+    at Protocol.handshake (D:\work\MESAPI\node_modules\mysql\lib\protocol\Protocol.js:52:41)
+    at PoolConnection.connect (D:\work\MESAPI\node_modules\mysql\lib\Connection.js:109:18)
+    at Pool.getConnection (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:45:23)
+    at Pool.releaseConnection (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:135:10)
+    at Pool._removeConnection (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:247:8)
+    at Pool._purgeConnection (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:228:8)
+    at Ping.onPing [as _callback] (D:\work\MESAPI\node_modules\mysql\lib\Pool.js:90:12)
+    at Ping.Sequence.end (D:\work\MESAPI\node_modules\mysql\lib\protocol\sequences\Sequence.js:96:24)
+    at D:\work\MESAPI\node_modules\mysql\lib\protocol\Protocol.js:390:18
+  errorno: 'ETIMEDOUT',
+  code: 'ETIMEDOUT',
+  syscall: 'connect',
+  fatal: true }
+[2018-12-13T15:22:08.390] [ERROR] dateFileLog - { TypeError: D:\work\MESAPI\yujiang.Foil.Node.WebServer\app\system\sitemap\showSitemap.{v}.ejs:18
+    16| 
+    17| <div class="panel panel-default">
+ >> 18| <div class="panel-heading">
+    19|     <h3 class="panel-title">欢迎<%-(locals.session==null)?"什么？你居然跳过了登录界面？":locals.session.yjUser.AID%></h3>
+    20| </div>
+    21| <div class="panel-body">
+
+Cannot read property 'AID' of undefined
+    at eval (eval at exports.compile (D:\work\MESAPI\node_modules\ejs-locals\node_modules\ejs\lib\ejs.js:237:14), <anonymous>:30:470)
+    at eval (eval at exports.compile (D:\work\MESAPI\node_modules\ejs-locals\node_modules\ejs\lib\ejs.js:237:14), <anonymous>:30:1897)
+    at D:\work\MESAPI\node_modules\ejs-locals\node_modules\ejs\lib\ejs.js:250:15
+    at Object.exports.render (D:\work\MESAPI\node_modules\ejs-locals\node_modules\ejs\lib\ejs.js:288:13)
+    at Object.exports.renderFile (D:\work\MESAPI\node_modules\ejs-locals\node_modules\ejs\lib\ejs.js:318:20)
+    at View.module.exports [as engine] (D:\work\MESAPI\node_modules\ejs-locals\index.js:85:7)
+    at View.render (D:\work\MESAPI\node_modules\express\lib\view.js:126:8)
+    at tryRender (D:\work\MESAPI\node_modules\express\lib\application.js:639:10)
+    at Function.render (D:\work\MESAPI\node_modules\express\lib\application.js:591:3)
+    at ServerResponse.render (D:\work\MESAPI\node_modules\express\lib\response.js:961:7)
+  path: 'D:\\work\\MESAPI\\yujiang.Foil.Node.WebServer\\app\\system\\sitemap\\showSitemap.{v}.ejs' }
+[2018-12-13T18:03:01.925] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:01.931] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:01.933] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:01.936] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:01.940] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:01.943] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:01.970] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:06.311] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:06.335] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:06.336] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:06.340] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:06.343] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:06.347] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }
+[2018-12-13T18:03:06.355] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]列名 'UserName' 无效。
+  sqlstate: '42S22',
+  code: 207,
+  sql: 'select c.PersonID as UserID,c.personName  as UserName, d.* from( select a.ProdID,b.Action from comproduct a,(select f.PKValue,f.Action,f.username from (select PKValue,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIComm.Product\' group by PKValue) e,comChangeLog f where e.PKValue=f.PKValue)b where a.ProdID=b.PKValue) d,comperson c where c.PersonID=d.UserName and ProdID=?' }

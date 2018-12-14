@@ -1,0 +1,52 @@
+[2018-12-14T14:23:15.809] [ERROR] dateFileLog - { Error: listen EADDRINUSE :::3000
+    at Server.setupListenHandle [as _listen2] (net.js:1360:14)
+    at listenInCluster (net.js:1401:12)
+    at Server.listen (net.js:1485:7)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjApp.js:218:14
+    at D:\work\MESAPI\node_modules\async\lib\async.js:610:21
+    at D:\work\MESAPI\node_modules\async\lib\async.js:249:17
+    at iterate (D:\work\MESAPI\node_modules\async\lib\async.js:149:13)
+    at async.eachSeries (D:\work\MESAPI\node_modules\async\lib\async.js:165:9)
+    at _asyncMap (D:\work\MESAPI\node_modules\async\lib\async.js:248:13)
+    at Object.mapSeries (D:\work\MESAPI\node_modules\async\lib\async.js:231:23)
+  errno: 'EADDRINUSE',
+  code: 'EADDRINUSE',
+  syscall: 'listen',
+  address: '::',
+  port: 3000 }
+[2018-12-14T14:23:45.640] [ERROR] dateFileLog - { Error: listen EADDRINUSE :::3000
+    at Server.setupListenHandle [as _listen2] (net.js:1360:14)
+    at listenInCluster (net.js:1401:12)
+    at Server.listen (net.js:1485:7)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjApp.js:218:14
+    at D:\work\MESAPI\node_modules\async\lib\async.js:610:21
+    at D:\work\MESAPI\node_modules\async\lib\async.js:249:17
+    at iterate (D:\work\MESAPI\node_modules\async\lib\async.js:149:13)
+    at async.eachSeries (D:\work\MESAPI\node_modules\async\lib\async.js:165:9)
+    at _asyncMap (D:\work\MESAPI\node_modules\async\lib\async.js:248:13)
+    at Object.mapSeries (D:\work\MESAPI\node_modules\async\lib\async.js:231:23)
+  errno: 'EADDRINUSE',
+  code: 'EADDRINUSE',
+  syscall: 'listen',
+  address: '::',
+  port: 3000 }
+[2018-12-14T15:15:44.377] [ERROR] dateFileLog - { Error: listen EADDRINUSE :::3000
+    at Server.setupListenHandle [as _listen2] (net.js:1360:14)
+    at listenInCluster (net.js:1401:12)
+    at Server.listen (net.js:1485:7)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjApp.js:218:14
+    at D:\work\MESAPI\node_modules\async\lib\async.js:610:21
+    at D:\work\MESAPI\node_modules\async\lib\async.js:249:17
+    at iterate (D:\work\MESAPI\node_modules\async\lib\async.js:149:13)
+    at async.eachSeries (D:\work\MESAPI\node_modules\async\lib\async.js:165:9)
+    at _asyncMap (D:\work\MESAPI\node_modules\async\lib\async.js:248:13)
+    at Object.mapSeries (D:\work\MESAPI\node_modules\async\lib\async.js:231:23)
+  errno: 'EADDRINUSE',
+  code: 'EADDRINUSE',
+  syscall: 'listen',
+  address: '::',
+  port: 3000 }
+[2018-12-14T15:25:52.790] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]关键字 'Where' 附近有语法错误。
+  sqlstate: '42000',
+  code: 156,
+  sql: 'select f.UserID,f.UserName,e.* from prdBOMMain e,( select c.PersonID as UserID,c.PersonName as UserName,d.PKValue from comperson c,(select a.PKValue,a.UserName from comChangeLog a inner join (select PKValue ,max(changetime)as changetime from comChangeLog where   ProgID=\'CHIProdt.BOM\' group by PKValue  ) b on a.PKValue=b.PKValue and a.ChangeTime=b.changetime) d where c.PersonID=d.UserName) f where e.ProductID=f.PKValue Where ProductID =?' }
