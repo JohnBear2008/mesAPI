@@ -115,19 +115,13 @@ function ERPtoMES(){
                         error: {}
                     });
             	}
-            	
-            	 
-            	
+
             }
 
-           
-            
-            
         },
         error : {}
     });
-	
-	
+
 }
 
 

@@ -78,7 +78,7 @@ function ERPtoMES(){
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
-            console.log("get 工程变更主表data:"+JSON.stringify(data));
+            console.log("get 工程变更单主表data:"+JSON.stringify(data));
             //插入mes-----------------
             
             if(data.length!=0){
@@ -105,7 +105,7 @@ function ERPtoMES(){
                         sql: postsql,
                         parameters: ["ERP","prdVaryMain",data[i].varyid,data[i].varyid,"API","0",SynchType,CreateTime],
                         success: function(result) {
-                        	console.log("工程变更主表插入成功!")
+                        	console.log("工程变更单主表插入成功!")
                         },
                         error: {}
                     });

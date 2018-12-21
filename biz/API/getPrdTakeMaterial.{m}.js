@@ -13,14 +13,14 @@ module.exports = function(sender) {
     
     var getinfo=sender.req.query;
     
-    var WareInNO=sender.req.query.WareInNO;
+    var TakeMatNo=sender.req.query.TakeMatNo;
     var Flag=sender.req.query.Flag;
     
     console.log("getinfo:"+JSON.stringify(getinfo));
-    console.log("数据类型:"+typeof(WareInNO));
+    console.log("数据类型:"+typeof(TakeMatNo));
     
-    if(typeof(WareInNO)=="string"){
-    	var sqlmain="select MakerID as UserID,Maker as UserName,BillDate,WareInNO,WareInClass,MkOrdNo,WareInType,Permitter,SumQuantity,MakerID,ProdtMan,ProdId from prdWareIn where WareInNO=? and Flag=?";
+    if(typeof(TakeMatNo)=="string"){
+    	var sqlmain="select MakerID as UserID,Maker as UserName,Flag,TakeMatNo,TakeMatDate,TakeReason,TakeQuantity,MkOrdType,MkOrdNo,Permitter,TakeMan from prdTakeMaterial where TakeMatNo=? and Flag=?";
     	var sqlmats="select Flag,ProdID,ProdName,WareID,IsReplace from comprodrec where BillNO = ? and Flag=?";
     }
 
@@ -31,7 +31,7 @@ module.exports = function(sender) {
     	    	
     	        connectionOptions:connection,
     	        sql : sqlmain,
-    	        parameters : [WareInNO,Flag],
+    	        parameters : [TakeMatNo,Flag],
     	        rowsAsArray : true,
     	        success : function(result) {
     	            var DataMain=yjDB.dataSet2ObjectList(result.meta,result.rows);
@@ -41,7 +41,7 @@ module.exports = function(sender) {
     	            	
     	                connectionOptions:connection,
     	                sql : sqlmats,
-    	                parameters : [WareInNO,Flag],
+    	                parameters : [TakeMatNo,Flag],
     	                rowsAsArray : true,
     	                success : function(MatsResult) {
     	                    var DataMats=yjDB.dataSet2ObjectList(MatsResult.meta,MatsResult.rows);  
@@ -53,14 +53,19 @@ module.exports = function(sender) {
     	                    var mesData={return:true,Message:''}
     	                    mesData["Data"]=DataMain;
  //	                    console.log("mesData:"+JSON.stringify(mesData));
+
     	                    sender.success(mesData);
     	                },
     	                error : sender.error
     	            });
+    	            
+    	            
+
     	        },
     	        error : sender.error
     	    });
-
+    	
+    	
     }else{
     	sender.error('请输入参数!');
     }

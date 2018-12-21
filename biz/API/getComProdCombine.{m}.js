@@ -13,20 +13,21 @@ module.exports = function(sender) {
     
     var getinfo=sender.req.query;
     
-    var BillNO=sender.req.query.BillNO;
-    var Flag=sender.req.query.Flag;
+    var ProdID=sender.req.query.ProdID;
     console.log("getinfo:"+JSON.stringify(getinfo));
     
   
-    console.log("数据类型:"+typeof(BillNO));
+    console.log("数据类型:"+typeof(ProdID));
     
-    if(typeof(BillNO)=="string"){
-    	var sql="select BillNO,BillDate,MkOrdType,MkOrdNO from comprodrec where BillNO =? and Flag=?";
+    if(typeof(ProdID)=="string"){
+//    	var sql="select ProdID,ClassID,ProdName,ProdForm from comproduct Where ProdID =?";
+    	
+    	var sql="select * from comProdCombine where ProdID=?"
     }
     
-//    if(typeof(BillNO)=="object"){
+//    if(typeof(ProdID)=="object"){
 //
-//    	  var sql="select * from prdMKOrdMain Where BillNO in('333','444') ";
+//    	  var sql="select * from prdMKOrdMain Where ProdID in('333','444') ";
 //    }
 //    
 //    console.log("connection:"+JSON.stringify(connection));
@@ -35,7 +36,7 @@ module.exports = function(sender) {
     	
         connectionOptions:connection,
         sql : sql,
-        parameters : [BillNO,Flag],
+        parameters : [ProdID],
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);

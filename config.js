@@ -35,7 +35,7 @@ var g_dbConenctions = {
     	  connection:{
     	   driver : "SQL Server Native Client 11.0",
     	   server : '192.168.0.2',
-    	   database : 'CHIComp99',
+    	   database : 'CHIComp98',
     	   user: 'sa',
          password: 'techDG2218',
     	  }

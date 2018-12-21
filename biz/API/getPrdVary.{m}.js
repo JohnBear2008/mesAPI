@@ -15,13 +15,13 @@ module.exports = function(sender) {
     
     var getinfo=sender.req.query;
     
-    var ProductID=sender.req.query.ProductID;
+    var VaryID=sender.req.query.VaryID;
     console.log("getinfo:"+JSON.stringify(getinfo));
-    console.log("数据类型:"+typeof(ProductID));
+    console.log("数据类型:"+typeof(VaryID));
     
-    if(typeof(ProductID)=="string"){
-    	var sqlmain="select f.UserID,f.UserName,e.ProductID,e.ProductName,e.BatchAmount,e.NorProdtMode,e.NorProdtLine,e.WorkTimeOfBatch,e.CurVersion from (select i.* from prdBOMMain i inner join (select MAX(CurVersion)as CurVersion,ProductID from prdBOMMain  group by ProductID) j on i.ProductID=j.ProductID and i.CurVersion=j.CurVersion) e,( select c.PersonID as UserID,c.PersonName as UserName,d.PKValue from comperson c,(select a.PKValue,a.UserName from comChangeLog a inner join (select PKValue ,max(changetime)as changetime from comChangeLog where   ProgID='CHIProdt.BOM' group by PKValue  ) b on a.PKValue=b.PKValue and a.ChangeTime=b.changetime) d where c.PersonID=d.UserName) f where e.ProductID=f.PKValue and ProductID =?";
-    	var sqlmats="select Flag,SubProdID,QtyOfBatch,WastingRate,Detail,BatchAmount from prdBOMMats where ProductID = ? and Flag=1";
+    if(typeof(VaryID)=="string"){
+    	var sqlmain="select MakerID as UserID,Maker as UserName,VaryID,VaryDate,EffectDate,IsEffect,VaryReason,VaryMan,ProductID,ProductName from prdVaryMain where VaryID=?";
+    	var sqlmats="select VaryType,ProductID,SubProdID,QtyOfBatch,WastingRate,MatSource from prdVaryMats  where VaryID = ? ";
     }
     
 
@@ -31,7 +31,7 @@ module.exports = function(sender) {
     	
         connectionOptions:connection,
         sql : sqlmain,
-        parameters : [ProductID],
+        parameters : [VaryID],
         rowsAsArray : true,
         success : function(result) {
         	
@@ -44,13 +44,13 @@ module.exports = function(sender) {
             	
                 connectionOptions:connection,
                 sql : sqlmats,
-                parameters : [ProductID],
+                parameters : [VaryID],
                 rowsAsArray : true,
                 success : function(MatsResult) {
                     var DataMats=yjDB.dataSet2ObjectList(MatsResult.meta,MatsResult.rows);  
 //                    console.log("DataMats:"+JSON.stringify(DataMats));
 
-                    DataMain[0]["PrdMats"]=DataMats;      
+                    DataMain[0]["Mats"]=DataMats;      
                     
 //                    console.log("DataMain:"+JSON.stringify(DataMain));
                     var mesData={return:true,Message:''}

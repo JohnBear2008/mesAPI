@@ -13,20 +13,21 @@ module.exports = function(sender) {
     
     var getinfo=sender.req.query;
     
-    var BillNO=sender.req.query.BillNO;
-    var Flag=sender.req.query.Flag;
+    var WareHouseID=sender.req.query.WareHouseID;
     console.log("getinfo:"+JSON.stringify(getinfo));
     
   
-    console.log("数据类型:"+typeof(BillNO));
+    console.log("数据类型:"+typeof(WareHouseID));
     
-    if(typeof(BillNO)=="string"){
-    	var sql="select BillNO,BillDate,MkOrdType,MkOrdNO from comprodrec where BillNO =? and Flag=?";
+    if(typeof(WareHouseID)=="string"){
+    	var sql="select f.UserID,f.UserName,e.WareHouseID,e.WareHouseName from comWareHouse e,( select c.PersonID as UserID,c.PersonName as UserName,d.PKValue from comperson c,(select a.PKValue,a.UserName from comChangeLog a inner join (select PKValue ,max(changetime)as changetime from comChangeLog where   ProgID='CHIComm.WareHouse' group by PKValue  ) b on a.PKValue=b.PKValue and a.ChangeTime=b.changetime) d where c.PersonID=d.UserName) f where e.WareHouseID=f.PKValue and PKValue=?";
+    	
+
     }
     
-//    if(typeof(BillNO)=="object"){
+//    if(typeof(WareHouseID)=="object"){
 //
-//    	  var sql="select * from prdMKOrdMain Where BillNO in('333','444') ";
+//    	  var sql="select * from prdMKOrdMain Where WareHouseID in('333','444') ";
 //    }
 //    
 //    console.log("connection:"+JSON.stringify(connection));
@@ -35,7 +36,7 @@ module.exports = function(sender) {
     	
         connectionOptions:connection,
         sql : sql,
-        parameters : [BillNO,Flag],
+        parameters : [WareHouseID],
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
