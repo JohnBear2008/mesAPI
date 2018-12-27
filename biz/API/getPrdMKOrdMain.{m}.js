@@ -21,7 +21,7 @@ module.exports = function(sender) {
     
     if(typeof(MKOrdNO)=="string"){
 
-    	var sql="select MKOrdNO,MKOrdDate,MakeType,ProductID,Producer,ProdtQty,CompleteStatus from prdMKOrdMain Where MKOrdNO =?";
+    	var sql="select MKOrdNO,MKOrdDate,MakeType,ProductID,Producer,ProdtQty,CompleteStatus from prdMKOrdMain Where Flag='1' and MKOrdNO =? ";
     }
     
 //    if(typeof(MKOrdNO)=="object"){

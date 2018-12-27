@@ -31,32 +31,26 @@ module.exports = function(sender) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
 
             if(data.length!=0){
-//           	 console.log("data:"+JSON.stringify(data));       
-              var mesData={return:true,Message:'',Data:data}
-              sender.success(mesData);
-          	
-           }else{
-           	
-//           	console.log("data2222:"+JSON.stringify(data));     
-           	
-           	yjDBService.exec({
-       			
-       			connectionOptions:connection,
-                   sql: sql2,
-                   parameters: [ClassID],
-                   success: function(result2) {
-                   	 var data2=yjDB.dataSet2ObjectList(result2.meta,result2.rows);
-                   	 console.log("data2:"+JSON.stringify(data2));
-                   	 data2[0].UserID="Admin";
-                   	 data2[0].UserName="Admin";
-                   	 var mesData={return:true,Message:'',Data:data2}
-                   	 sender.success(mesData);
-                   },
-                   error: {}
-
-               });
-
-           }
+                var mesData={return:true,Message:'',Data:data}
+                console.log("mesData:"+JSON.stringify(mesData));       
+                sender.success(mesData);           	
+             }else{
+             	yjDBService.exec({
+         			connectionOptions:connection,
+                     sql: sql2,
+                     parameters: [ClassID],
+                     success: function(result2) {
+                     	 var data2=yjDB.dataSet2ObjectList(result2.meta,result2.rows);
+                     	 console.log("data2:"+JSON.stringify(data2));
+                     	 data2[0].UserID="Admin";
+                     	 data2[0].UserName="Admin";
+                     	 var mesData={return:true,Message:'',Data:data2}                    	 
+                     	 console.log("mesData:"+JSON.stringify(mesData));     
+                     	 sender.success(mesData);
+                     },
+                     error: sender.error
+                 });
+            }
         },
         error : sender.error
     });
