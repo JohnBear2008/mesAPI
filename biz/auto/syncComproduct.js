@@ -5,6 +5,8 @@ var yjDBServiceUtil=global.yjRequire("yujiang.Foil",'yjDBService.util.js');
 var connectionOptions=yjGlobal.config.db_Connection.erp_Connection.connection;
 var connectionOptionsMES=yjGlobal.config.db_Connection.mesapi_Connection.connection;
 
+require("../../client/js/Date.js");
+
 var connection=null;
     if(connectionOptions){
 	    	connection=yjDBServiceUtil.extractConnectionOptions(connectionOptions);
@@ -23,25 +25,7 @@ var connectionMES=null;
     var postsql="insert into dataaynchmappings (ProjectName,TableName,ID,Name,SynchMold,SynchFlag,SynchType,CreateTime) values(?,?,?,?,?,?,?,?)"
     //postsql 为向中间数据库插入数据的sql语句	
 
-//-------------------------------
-    	
-    	Date.prototype.Format = function (fmt) {
-        var o = {
-            "M+": this.getMonth() + 1, //月份 
-            "d+": this.getDate(), //日 
-            "H+": this.getHours(), //小时 
-            "m+": this.getMinutes(), //分 
-            "s+": this.getSeconds(), //秒 
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-            "S": this.getMilliseconds() //毫秒 
-        };
-        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o)
-        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        return fmt;
-    }
-    	
-    	
+
 
 ////------------------------------------	    
 var schedule = require("node-schedule");
@@ -53,11 +37,14 @@ var schedule = require("node-schedule");
 //   rule.hour = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];  
  rule.minute = [0,5,10,15,20,25,30,35,40,45,50,55];  
  //rule.minute =  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59 ]; 
- //rule.second=  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59 ];  
+//rule.second=  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59 ];  
      
     schedule.scheduleJob(rule, function(){ 
     	
     	 CreateTime = new Date().Format("yyyy-MM-dd HH:mm:ss");
+ //   	 console.log("CreateTime:"+CreateTime);
+
+    	 
     	   
 //      console.log("CreateTime:"+JSON.stringify(CreateTime));
 	
