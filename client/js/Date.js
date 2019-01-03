@@ -3,7 +3,7 @@
  *导入方式：var Date = require("./Date.js"); var Date = new Date();
  */
 
-
+function Date(){
 	Date.prototype.Format = function (fmt) {
         var o = {
             "M+": this.getMonth() + 1, //月份 
@@ -20,5 +20,7 @@
         return fmt;
    }
 
+}
 
 
+module.exports = Date;
