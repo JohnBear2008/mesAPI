@@ -1,0 +1,141 @@
+[2019-01-02T09:07:03.840] [ERROR] dateFileLog - TypeError: Cannot set property 'Mats' of undefined
+    at success (D:\work\MESAPI\mesAPI\biz\API\getPrdVary.{m}.js:53:40)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:136:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:188:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+[2019-01-02T09:07:18.240] [ERROR] dateFileLog - TypeError: Cannot set property 'Mats' of undefined
+    at success (D:\work\MESAPI\mesAPI\biz\API\getPrdVary.{m}.js:53:40)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:136:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:188:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+[2019-01-02T09:11:29.971] [ERROR] dateFileLog - TypeError: Cannot set property 'UserID' of undefined
+    at success (D:\work\MESAPI\mesAPI\biz\API\getPrdprdLine.{m}.js:56:39)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:136:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:188:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+[2019-01-02T09:15:40.937] [ERROR] dateFileLog - TypeError: Cannot set property 'Mats' of undefined
+    at success (D:\work\MESAPI\mesAPI\biz\API\getPrdVary.{m}.js:53:40)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:136:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:188:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+[2019-01-02T09:17:08.078] [ERROR] dateFileLog - TypeError: Cannot set property 'Mats' of undefined
+    at success (D:\work\MESAPI\mesAPI\biz\API\getPrdVary.{m}.js:53:40)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:136:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:188:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+[2019-01-02T09:27:42.899] [ERROR] dateFileLog - TypeError: Cannot set property 'UserID' of undefined
+    at success (D:\work\MESAPI\mesAPI\biz\API\getPrdprdLine.{m}.js:56:39)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:136:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:188:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+[2019-01-02T09:28:13.300] [ERROR] dateFileLog - TypeError: Cannot set property 'UserID' of undefined
+    at success (D:\work\MESAPI\mesAPI\biz\API\getPrdprdLine.{m}.js:56:39)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:136:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:188:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+[2019-01-02T10:30:00.426] [ERROR] dateFileLog - { Error: [Microsoft][SQL Server Native Client 11.0][SQL Server]从数据类型 varchar 转换为 float 时出错。
+  sqlstate: '42000',
+  code: 8114,
+  sql: ' select a.MKOrdNO,b.Action from prdmkordmain a,(select  PKValue,Action from comChangeLog where   changetime>= \'2018-01-01\'  and ProgID=\'CHIProdt.InnMkOrd\')b where a.MKOrdNO=b.PKValue' }
+[2019-01-02T13:24:45.328] [ERROR] dateFileLog - { Error: listen EADDRINUSE :::3000
+    at Server.setupListenHandle [as _listen2] (net.js:1360:14)
+    at listenInCluster (net.js:1401:12)
+    at Server.listen (net.js:1485:7)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjApp.js:218:14
+    at D:\work\MESAPI\node_modules\async\lib\async.js:610:21
+    at D:\work\MESAPI\node_modules\async\lib\async.js:249:17
+    at iterate (D:\work\MESAPI\node_modules\async\lib\async.js:149:13)
+    at async.eachSeries (D:\work\MESAPI\node_modules\async\lib\async.js:165:9)
+    at _asyncMap (D:\work\MESAPI\node_modules\async\lib\async.js:248:13)
+    at Object.mapSeries (D:\work\MESAPI\node_modules\async\lib\async.js:231:23)
+  errno: 'EADDRINUSE',
+  code: 'EADDRINUSE',
+  syscall: 'listen',
+  address: '::',
+  port: 3000 }
+[2019-01-02T15:30:15.259] [ERROR] dateFileLog - TypeError: Cannot set property 'Mats' of undefined
+    at success (D:\work\MESAPI\mesAPI\biz\API\getPrdMKOrd.{m}.js:53:45)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:136:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:188:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+[2019-01-02T15:30:28.974] [ERROR] dateFileLog - TypeError: Cannot set property 'Mats' of undefined
+    at success (D:\work\MESAPI\mesAPI\biz\API\getPrdMKOrd.{m}.js:53:45)
+    at Object.exports.safeSuccess (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:94:13)
+    at Object.exports.handleResult (D:\work\MESAPI\yujiang.Foil.Node\src\yjError.js:148:12)
+    at checkResults (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:136:19)
+    at StreamEvents.<anonymous> (D:\work\MESAPI\yujiang.Foil.Node\src\yjDBService.engine.sqlserver.js:188:14)
+    at emitNone (events.js:106:13)
+    at StreamEvents.emit (events.js:208:7)
+    at Immediate.<anonymous> (D:\work\MESAPI\node_modules\msnodesqlv8\lib\reader.js:91:22)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+[2019-01-02T16:01:10.115] [ERROR] dateFileLog - Error: 'config.security.isNeedSession' must set to true.
+    at module.exports (D:\work\MESAPI\yujiang.Foil.Node.WebServer\app\account\showLogin.{get}.{m}.js:4:16)
+    at buildData (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:187:6)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:129:5
+    at Object.module.exports.read (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.cache.js:78:4)
+    at loadData (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:123:15)
+    at rrnmv (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:120:2)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:223:4
+    at Layer.handle [as handle_request] (D:\work\MESAPI\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\work\MESAPI\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (D:\work\MESAPI\node_modules\express\lib\router\route.js:112:3)
+[2019-01-02T16:01:19.426] [ERROR] dateFileLog - Error: 'config.security.isNeedSession' must set to true.
+    at module.exports (D:\work\MESAPI\yujiang.Foil.Node.WebServer\app\account\showLogin.{get}.{m}.js:4:16)
+    at buildData (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:187:6)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:129:5
+    at Object.module.exports.read (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.cache.js:78:4)
+    at loadData (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:123:15)
+    at rrnmv (D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:120:2)
+    at D:\work\MESAPI\yujiang.Foil.Node\src\yjMVC.js:223:4
+    at Layer.handle [as handle_request] (D:\work\MESAPI\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\work\MESAPI\node_modules\express\lib\router\route.js:131:13)
+    at Route.dispatch (D:\work\MESAPI\node_modules\express\lib\router\route.js:112:3)
