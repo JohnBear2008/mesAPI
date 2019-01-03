@@ -48,7 +48,7 @@ module.exports = function(sender) {
                 rowsAsArray : true,
                 success : function(MatsResult) {
                     var DataMats=yjDB.dataSet2ObjectList(MatsResult.meta,MatsResult.rows);  
-//                    console.log("DataMats:"+JSON.stringify(DataMats));
+                   console.log("DataMats:"+JSON.stringify(DataMats));
 
                     DataMain[0]["Mats"]=DataMats;      
                     

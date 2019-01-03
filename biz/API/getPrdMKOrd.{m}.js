@@ -21,7 +21,7 @@ module.exports = function(sender) {
     
     if(typeof(MKOrdNO)=="string"){
 
-    	var sqlmain="select MakerID as UserID,Maker as UserName,MKOrdNO,MKOrdDate,MakeType,ProductID,Producer,ProdtQty,CompleteStatus,Permitter from prdMKOrdMain where MKOrdNO=?";
+    	var sqlmain="select MakerID as UserID,Maker as UserName,MKOrdNO,MKOrdDate,MakeType,SrcMkOrdType,BillStatus,ProductID,Producer,ProdtQty,CompleteStatus,Permitter from prdMKOrdMain where MKOrdNO=?";
     	var sqlmats="select PartsID,MatForm,SubProdID,UnitOughtQty,OughtQty,OriginalQty,WestingRate,MatSource from prdMkOrdMats where MkOrdNO = ?";
     	
     	
@@ -61,8 +61,6 @@ module.exports = function(sender) {
     	                },
     	                error : sender.error
     	            });
-    	            
-    	            
 
     	        },
     	        error : sender.error
