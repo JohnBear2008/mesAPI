@@ -21,7 +21,7 @@ var g_dbConenctions = {
 	"mesapi_Connection" : {
 		 engine: "mysql",
 	  	  connection:{
-	  	   server : '10.10.0.25',
+	  	   server : '10.10.0.22',
 	  	   database : 'iMES_Component_API',
 	  	   user: 'demo',
 	  	   port:'3308',
