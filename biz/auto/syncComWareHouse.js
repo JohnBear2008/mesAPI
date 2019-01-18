@@ -56,7 +56,7 @@ function ERPtoMES() {
                         yjDBService.exec({
                             connectionOptions: connectionMES,
                             sql: postsql,
-                            parameters: ["ERP", "comWareHouse", data[i].WareHouseID, data[i].WareHouseID, "API", "0", SynchType, CreateTime],
+                            parameters: ["ERP", "comWareHouse", data[i].WareHouseID, "仓库", "API", "0", SynchType, CreateTime],
                             success: function (result) {
                                     console.log("仓库插入成功!")
                                 },

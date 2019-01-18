@@ -87,7 +87,7 @@ function ERPtoMES(){
             			
             			connectionOptions:connectionMES,
                         sql: postsql,
-                        parameters: ["ERP","prdVaryMain",data[i].varyid,data[i].varyid,"API","0",SynchType,CreateTime],
+                        parameters: ["ERP","prdVaryMain",data[i].varyid,"工程变更单","API","0",SynchType,CreateTime],
                         success: function(result) {
                         	console.log("工程变更单主表插入成功!")
                         },

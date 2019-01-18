@@ -8,6 +8,9 @@ module.exports = function (sender) {
         connection = yjDBServiceUtil.extractConnectionOptions(connectionOptions);
     }
     var getinfo = sender.req.query;
+    
+    console.log("API getComproductinfo:"+JSON.stringify(getinfo));
+    
     var ProdID = sender.req.query.ProdID;
     if (typeof (ProdID) == "string") {
         var sql = " select h.ProdID,h.ClassID,g.ClassName,h.ProdName,h.ProdForm,h.UserID,h.UserName from (select e.ProdID,e.ClassID,e.ProdName,e.ProdForm,f.UserID,f.UserName from comproduct e,( select c.PersonID as UserID,c.PersonName as UserName,d.PKValue from comperson c,(select a.PKValue,a.UserName from comChangeLog a inner join (select PKValue ,max(changetime)as changetime from comChangeLog where   ProgID='CHIComm.Product' group by PKValue  ) b on a.PKValue=b.PKValue and a.ChangeTime=b.changetime) d where c.PersonID=d.UserName) f where e.ProdID=f.PKValue and PKValue=?) h inner join comProductClass g  on g.ClassID=h.ClassID";
@@ -18,6 +21,7 @@ module.exports = function (sender) {
         sql: sql,
         parameters: [ProdID],
         rowsAsArray: true,
+        timerTimeout:15,
         isAutoDisconnect: false,
         success: function (result) {
                 var data = yjDB.dataSet2ObjectList(result.meta, result.rows);
@@ -33,6 +37,7 @@ module.exports = function (sender) {
                     yjDBService.exec({
                         connection: result.connection,
                         sql: sql2,
+                        timerTimeout:15,
                         parameters: [ProdID],
                         success: function (result2) {
                                 var data2 = yjDB.dataSet2ObjectList(result2.meta, result2.rows);

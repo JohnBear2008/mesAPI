@@ -64,7 +64,7 @@ function ERPtoMES(){
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
-            console.log("get BOM主表data:"+JSON.stringify(data));
+            console.log("get BOM表data:"+JSON.stringify(data));
             //插入mes-----------------
             
             if(data.length!=0){
@@ -89,9 +89,9 @@ function ERPtoMES(){
             			
             			connectionOptions:connectionMES,
                         sql: postsql,
-                        parameters: ["ERP","prdBOMMain",data[i].ProductID,data[i].ProductID,"API","0",SynchType,CreateTime],
+                        parameters: ["ERP","prdBOMMain",data[i].ProductID,"BOM表","API","0",SynchType,CreateTime],
                         success: function(result) {
-                        	console.log("BOM主表插入成功!")
+                        	console.log("BOM表插入成功!")
                         },
                         error: {}
                     });

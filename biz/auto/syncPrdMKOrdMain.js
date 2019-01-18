@@ -67,7 +67,7 @@ function ERPtoMES(){
         rowsAsArray : true,
         success : function(result) {
             var data=yjDB.dataSet2ObjectList(result.meta,result.rows);
-            console.log("get生产制令主表data:"+JSON.stringify(data));
+            console.log("get生产制令表data:"+JSON.stringify(data));
             //插入mes-----------------
             
             if(data.length!=0){
@@ -92,9 +92,9 @@ function ERPtoMES(){
             			
             			connectionOptions:connectionMES,
                         sql: postsql,
-                        parameters: ["ERP","prdMKOrdMain",data[i].MKOrdNO,data[i].MKOrdNO,"API","0",SynchType,CreateTime],
+                        parameters: ["ERP","prdMKOrdMain",data[i].MKOrdNO,"生产制令单","API","0",SynchType,CreateTime],
                         success: function(result) {
-                        	console.log("生产制令主表插入成功!")
+                        	console.log("生产制令表插入成功!")
                         },
                         error: {}
                     });

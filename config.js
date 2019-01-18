@@ -8,26 +8,37 @@ var g_dbConenctions = {
 	        password: '654321',
 	        insecureAuth: true
 	}, 
+	"mesapi_Connection" : {
+	 engine: "mysql",
+  	  connection:{
+  	   server : '127.0.0.1',
+  	   database : 'mesapi',
+  	   user: 'root',
+       password: '654321',
+  	  }
+	},
+	
+//	"mesapi_Connection" : {
+//		 engine: "mysql",
+//	  	  connection:{
+//	  	   server : '10.10.0.23',
+//	  	   database : 'iMES_Component_API',
+//	  	   user: 'demo',
+//	  	   port:'3308',
+//	       password: 'test',
+//	  	  }
+//		},
+//	//小港-----------------
 //	"mesapi_Connection" : {
 //	 engine: "mysql",
-//  	  connection:{
-//  	   server : '127.0.0.1',
-//  	   database : 'mesapi',
-//  	   user: 'root',
-//       password: '654321',
-//  	  }
+// 	  connection:{
+// 	   server : '172.16.12.2',
+// 	   database : 'iMES_Component_API',
+// 	   user: 'root',
+// 	   port:'3306',
+//      password: 'root',
+// 	  }
 //	},
-	
-	"mesapi_Connection" : {
-		 engine: "mysql",
-	  	  connection:{
-	  	   server : '10.10.0.22',
-	  	   database : 'iMES_Component_API',
-	  	   user: 'demo',
-	  	   port:'3308',
-	       password: 'test',
-	  	  }
-		},
     
     "erp_Connection" : {
     	  engine:"sqlserver",
